@@ -6,12 +6,8 @@ describe UseCase::CreateFlowPosition do
     create_flow_position_success: nil) }
 
   subject { described_class.new(listener: listener) }
-  let (:flow)       { ::Flow.new(
-    attributes: {},
-    listener: listener )}
-  let (:position)   { ::Position.new(
-    attributes: {},
-    listener: double )}
+  let (:flow)       { ::Flow.new({})}
+  let (:position)   { ::Position.new({})}
   let (:repository) { subject.repository }
   let (:attributes) { { flow: flow, position: position } }
 

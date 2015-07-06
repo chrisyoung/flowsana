@@ -4,9 +4,9 @@ describe UseCase::GetToPositions do
   subject        { described_class.new(listener) }
   let(:listener) { double }
   let(:transition) do
-    Transition.new(double, {
-      from: Position.new(listener: double, attributes: { name: "Lotus" }),
-      to:   Position.new(listener: double, attributes: { name: "Tadasana" })
+    Transition.new({
+      from: Position.new({ name: "Lotus" }),
+      to:   Position.new({ name: "Tadasana" })
     })
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Flow do
   let(:attributes) {{name: "Vinyasa"}}
-  subject { Flow.new(attributes: attributes, listener: double(flow_invalid: nil)) }
+  subject { Flow.new(attributes) }
 
   context "validates" do
     it "#name" do

@@ -6,16 +6,14 @@ module Repository
     end
 
     def create(attributes)
-      ::Flow.new(listener: self, attributes: attributes).valid?
-    end
-
-    def flow_valid(model)
-      @list << model
-      @listener.repository_create_success
-    end
-
-    def flow_invalid(model)
-      @listener.repository_create_failure
+      ::Flow.new(attributes).tap do |flow|
+        if flow.valid?
+          @list << flow
+          @listener.repository_create_success
+        else
+          @listener.repository_create_failure
+        end
+      end
     end
 
     def count

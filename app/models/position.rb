@@ -5,9 +5,8 @@ class Position
   attr_accessor :to_transitions
   attr_accessor :from_transitions
 
-  def initialize(listener:, attributes:)
+  def initialize(attributes)
     @repository       = repository || Repository::PositionMemory.new(self)
-    @listener         = listener
     @to_transitions   = []
     @from_transitions = []
     super(attributes)
@@ -15,15 +14,5 @@ class Position
 
   def to_positions
     to_transitions.map {|transition| transition.to}
-  end
-
-  def valid?
-    if super
-      @listener.position_valid(self)
-      true
-    else
-      @listener.position_invalid(self)
-      false
-    end
   end
 end

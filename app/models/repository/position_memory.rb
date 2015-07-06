@@ -6,12 +6,11 @@ module Repository
     end
 
     def create(attributes)
-      ::Position.new(listener: self, attributes: attributes).valid?
-    end
-
-    def position_valid(position)
-      @list << position
-      @listener.repository_create_success(position)
+      ::Position.new(attributes).tap do |position|
+        return unless position.valid?
+        @list << position
+        @listener.repository_create_success(position)
+      end
     end
 
     def count

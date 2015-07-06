@@ -3,8 +3,8 @@ require 'rails_helper'
 describe UseCase::GetPositions do
   subject! {described_class.new(listener: listener, repository: repository)}
   let     (:listener)   { double('subject listener') }
-  let     (:flow)       { Flow.new(listener: double('flow listener'), attributes: {}) }
-  let     (:position)   { Position.new(listener: double('position listener'), attributes: {})}
+  let     (:flow)       { Flow.new( {} ) }
+  let     (:position)   { Position.new({})}
   let     (:repository) { Repository::FlowPositionMemory.new }
 
   describe "#get" do

@@ -8,7 +8,7 @@ module Repository
     end
 
     def create(attributes:)
-      @list << ::FlowPosition.new(listener: self, attributes: attributes)
+      @list << ::FlowPosition.new(attributes)
       @listener.repository_create_success if @listener.respond_to?(:repository_create_success)
     end
 

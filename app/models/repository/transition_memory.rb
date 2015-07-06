@@ -7,12 +7,11 @@ module Repository
     end
 
     def create(attributes)
-      ::Transition.new(self, attributes).valid?
-    end
-
-    def transition_valid(transition)
-      @list << transition
-      @listener.repository_create_success
+      ::Transition.new(attributes).tap do |transition|
+        return unless transition.valid?
+        @list << transition
+        @listener.repository_create_success
+      end
     end
 
     def first
