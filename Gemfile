@@ -46,3 +46,4 @@ end
 gem "rspec-rails", :group => [:development, :test]
 gem "activemodel"
 gem 'pry'
+gem 'guard-rspec'
