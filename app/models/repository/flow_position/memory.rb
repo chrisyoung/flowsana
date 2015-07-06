@@ -7,7 +7,8 @@ module Repository
       end
 
       def create(attributes:)
-        @list << attributes
+        @list << ::FlowPosition.new(listener: self, attributes: attributes)
+        @listener.repository_create_success
       end
 
       def count

@@ -9,5 +9,9 @@ module UseCase
     def create(attributes)
       repository.create(attributes: attributes)
     end
+
+    def repository_create_success
+      @listener.create_flow_position_success(self)
+    end
   end
 end

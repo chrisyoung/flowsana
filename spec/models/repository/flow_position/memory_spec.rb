@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Repository::FlowPosition::Memory do
   let (:attributes) {}
-  subject { described_class.new(listener: double) }
+  subject { described_class.new(listener: double('subect_listener', repository_create_success: nil)) }
 
   it '#create' do
     subject.create(attributes: attributes)
@@ -11,7 +11,7 @@ describe Repository::FlowPosition::Memory do
   describe '#count' do
     it 'returns a count of flow positions' do
       subject.create(attributes: attributes)
-      subject.count.should == 1
+      expect(subject.count).to eq 1
     end
   end
 end
