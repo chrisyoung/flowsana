@@ -12,9 +12,5 @@ module UseCase
         @listener.create_position_success
       end
     end
-
-    def repository_create_success(position)
-
-    end
   end
 end
