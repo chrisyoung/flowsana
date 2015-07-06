@@ -1,15 +1,14 @@
 module Repository
   class FlowPositionMemory
-    attr_accessor :listener
-
-    def initialize(listener: nil)
-      @listener = listener
+    def initialize
       @list = []
     end
 
     def create(attributes:)
-      @list << ::FlowPosition.new(attributes)
-      @listener.repository_create_success if @listener.respond_to?(:repository_create_success)
+      ::FlowPosition.new(attributes).tap do |flow_position|
+        return unless flow_position.valid?
+        @list << flow_position
+      end
     end
 
     def count
@@ -17,7 +16,7 @@ module Repository
     end
 
     def get(flow:)
-      @listener.repository_get_success(positions: flow_positions(flow))
+      flow_positions(flow)
     end
 
     def flow_positions(flow)

@@ -6,7 +6,7 @@ class Position
   attr_accessor :from_transitions
 
   def initialize(attributes)
-    @repository       = repository || Repository::PositionMemory.new(self)
+    @repository       = repository || Repository::PositionMemory.new
     @to_transitions   = []
     @from_transitions = []
     super(attributes)

@@ -3,15 +3,13 @@ module UseCase
     attr_accessor :repository
     def initialize(listener:, repository: nil)
       @listener   = listener
-      @repository = (repository || Repository::FlowPositionMemory).new(listener: self)
+      @repository = (repository || Repository::FlowPositionMemory).new
     end
 
     def create(attributes)
-      repository.create(attributes: attributes)
-    end
-
-    def repository_create_success
-      @listener.create_flow_position_success(self)
+      if repository.create(attributes: attributes)
+        @listener.create_flow_position_success(self)
+      end
     end
   end
 end

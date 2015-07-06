@@ -1,8 +1,7 @@
 module Repository
   class TransitionMemory
     attr_accessor :list
-    def initialize(listener)
-      @listener = listener
+    def initialize
       @list     = []
     end
 
@@ -10,7 +9,6 @@ module Repository
       ::Transition.new(attributes).tap do |transition|
         return unless transition.valid?
         @list << transition
-        @listener.repository_create_success
       end
     end
 

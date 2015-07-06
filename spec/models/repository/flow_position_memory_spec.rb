@@ -4,13 +4,11 @@ describe Repository::FlowPositionMemory do
   let(:flow) {double('flow')}
   let(:position) {double('position')}
   let(:attributes) {{flow: flow, position: position}}
-  let(:listener) { double('subect_listener', repository_create_success: nil, repository_get_success: nil) }
 
-  subject { described_class.new(listener: listener) }
+  subject { described_class.new }
 
   describe '#create' do
     it 'notifies listener of success' do
-      expect(listener).to receive(:repository_create_success)
       subject.create(attributes: attributes)
     end
   end
@@ -21,7 +19,6 @@ describe Repository::FlowPositionMemory do
     end
 
     it do
-      expect(listener).to receive(:repository_get_success).with(positions: [position])
       subject.get(flow: flow)
     end
   end

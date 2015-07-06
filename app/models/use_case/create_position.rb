@@ -4,15 +4,17 @@ module UseCase
 
     def initialize(listener, repository=nil)
       @listener   = listener
-      @repository = (repository || Repository::PositionMemory).new(self)
+      @repository = (repository || Repository::PositionMemory).new
     end
 
     def create(attributes)
-      @repository.create(attributes)
+      if @repository.create(attributes)
+        @listener.create_position_success
+      end
     end
 
     def repository_create_success(position)
-      @listener.create_position_success
+
     end
   end
 end

@@ -1,16 +1,9 @@
 module Repository
   class PositionDatabase
-    def initialize(listener)
-      @listener = listener
-    end
-
     def create(attributes)
-      ::Position.new(self, attributes).valid?
-    end
-
-    def position_valid(position, flow)
-      ::AR::Position.create!(position.attributes)
-      @listener.repository_create_success(position)
+      ::Position.new(self, attributes).tap do |position|
+        if position.valid?
+          ::AR::Position.create!(position.attributes)
     end
 
     def count

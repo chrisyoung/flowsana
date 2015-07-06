@@ -1,7 +1,6 @@
 module Repository
   class PositionMemory
-    def initialize(listener)
-      @listener = listener
+    def initialize
       @list     = []
     end
 
@@ -9,7 +8,6 @@ module Repository
       ::Position.new(attributes).tap do |position|
         return unless position.valid?
         @list << position
-        @listener.repository_create_success(position)
       end
     end
 
