@@ -6,7 +6,7 @@ class Position
   attr_accessor :from_transitions
 
   def initialize(listener:, attributes:)
-    @repository       = repository || Repository::Position::Memory.new(self)
+    @repository       = repository || Repository::PositionMemory.new(self)
     @listener         = listener
     @to_transitions   = []
     @from_transitions = []

@@ -5,7 +5,7 @@ describe UseCase::GetPositions do
   let     (:listener)   { double('subject listener') }
   let     (:flow)       { Flow.new(listener: double('flow listener'), attributes: {}) }
   let     (:position)   { Position.new(listener: double('position listener'), attributes: {})}
-  let     (:repository) { Repository::FlowPosition::Memory.new }
+  let     (:repository) { Repository::FlowPositionMemory.new }
 
   describe "#get" do
     it "gets the flow's positions" do
