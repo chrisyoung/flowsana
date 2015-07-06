@@ -8,7 +8,7 @@ module Repository
       end
 
       def create(attributes)
-        ::Position.new(self, attributes).valid?
+        ::Position.new(listener: self, attributes: attributes).valid?
       end
 
       def position_valid(position)

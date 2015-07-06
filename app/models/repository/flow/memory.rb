@@ -7,7 +7,7 @@ module Repository
       end
 
       def create(attributes)
-        ::Flow.new(attributes, self).valid?
+        ::Flow.new(listener: self, attributes: attributes).valid?
       end
 
       def flow_valid(model)

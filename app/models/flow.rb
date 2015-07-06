@@ -5,7 +5,7 @@ class Flow
 
   validates_presence_of :name
 
-  def initialize(attributes, listener)
+  def initialize(listener:, attributes:)
     @attributes     = attributes
     @listener       = listener
     super(attributes)

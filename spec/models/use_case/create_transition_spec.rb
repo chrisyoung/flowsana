@@ -5,8 +5,8 @@ describe UseCase::CreateTransition do
     subject           { described_class.new(listener) }
     let (:listener)   { double(create_transition_success: nil) }
     let (:repository) { subject.repository }
-    let (:from)       { Position.new(double, { name: "Lotus" }) }
-    let (:to)         { Position.new(double, { name: "Tadasana" }) }
+    let (:from)       { Position.new(listener: double, attributes: { name: "Lotus" }) }
+    let (:to)         { Position.new(listener: double, attributes: { name: "Tadasana" }) }
 
     it 'adds the transition to the repository' do
       subject.create(from: from, to: to)

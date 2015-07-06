@@ -5,8 +5,8 @@ describe UseCase::GetToPositions do
   let(:listener) { double }
   let(:transition) do
     Transition.new(double, {
-      from: Position.new(double, { name: "Lotus" }),
-      to:   Position.new(double, { name: "Tadasana" })
+      from: Position.new(listener: double, attributes: { name: "Lotus" }),
+      to:   Position.new(listener: double, attributes: { name: "Tadasana" })
     })
   end
 

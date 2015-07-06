@@ -20,5 +20,4 @@ class Transition
       false
     end
   end
-
 end
