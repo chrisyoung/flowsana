@@ -1,7 +1,6 @@
 class Flow
   include ActiveModel::Model
   attr_accessor(:name)
-  attr_accessor(:first_position)
   attr_accessor(:attributes)
 
   validates_presence_of :name
@@ -9,7 +8,6 @@ class Flow
   def initialize(attributes, listener)
     @attributes     = attributes
     @listener       = listener
-    @first_position = []
     super(attributes)
   end
 

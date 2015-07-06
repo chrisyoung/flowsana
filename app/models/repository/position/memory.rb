@@ -8,12 +8,11 @@ module Repository
       end
 
       def create(attributes)
-        ::FirstPosition.new(self, attributes).valid?
+        ::Position.new(self, attributes).valid?
       end
 
-      def position_valid(position, flow)
+      def position_valid(position)
         @list << position
-        flow.first_position = position
         @listener.repository_create_success(position)
       end
 

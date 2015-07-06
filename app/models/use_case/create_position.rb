@@ -1,5 +1,5 @@
 module UseCase
-  class CreateFirstPosition
+  class CreatePosition
     attr_accessor :repository
 
     def initialize(listener, repository=nil)

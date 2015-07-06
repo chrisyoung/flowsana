@@ -6,7 +6,7 @@ module Repository
       end
 
       def create(attributes)
-        ::FirstPosition.new(self, attributes).valid?
+        ::Position.new(self, attributes).valid?
       end
 
       def position_valid(position, flow)
