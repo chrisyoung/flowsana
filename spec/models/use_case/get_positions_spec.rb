@@ -1,17 +1,14 @@
 require 'rails_helper'
 
 describe UseCase::GetPositions do
-  subject! {described_class.new(listener: listener, repository: repository)}
-  let     (:listener)   { double('subject listener') }
-  let     (:flow)       { Flow.new( {} ) }
-  let     (:position)   { Position.new({})}
-  let     (:repository) { Repository::FlowPositionMemory.new }
+  let(:listener) { double }
+  let(:position) { Repository::PositionMemory.new.create({name: "Tadasana"}) }
+  subject        { described_class.new(listener: listener) }
 
-  describe "#get" do
-    it "gets the flow's positions" do
-      repository.create(attributes: {flow: flow, position: position})
+  describe '#get' do
+    it 'notifies the listener' do
       expect(listener).to receive(:get_positions_success).with([position])
-      subject.get(flow: flow)
+      subject.get
     end
   end
 end

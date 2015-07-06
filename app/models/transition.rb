@@ -1,7 +1,6 @@
 class Transition
   include ActiveModel::Model
-  attr_accessor :from
-  attr_accessor :to
+  attr_accessor :to, :from
 
   def initialize(attributes)
     super(attributes)

@@ -4,14 +4,15 @@ module UseCase
 
     def initialize(listener, repository=nil)
       @listener   = listener
-      @repository = (repository || Repository::Flow::Memory).new
+      @repository = (repository || Repository::FlowMemory).new
     end
 
     def create(attributes)
-      if @repository.create(attributes)
-        @listener.create_flow_success
+      flow = @repository.create(attributes)
+      if flow
+        @listener.create_flow_success(flow)
       else
-        @listener.create_flow_failure
+        @listener.create_flow_failure(flow)
       end
     end
   end

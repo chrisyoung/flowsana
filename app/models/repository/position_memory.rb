@@ -1,6 +1,6 @@
 module Repository
   class PositionMemory
-    delegate :create, :count, to: :@singleton
+    delegate :create, :count, :get, to: :@singleton
     def initialize
       @singleton = PositionMemorySingleton.instance
     end
@@ -10,6 +10,10 @@ module Repository
 
       def list
         @list ||= []
+      end
+
+      def get
+        list
       end
 
       def clear

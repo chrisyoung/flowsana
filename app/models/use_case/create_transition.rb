@@ -12,7 +12,5 @@ module UseCase
         @listener.create_transition_success
       end
     end
-
-
   end
 end

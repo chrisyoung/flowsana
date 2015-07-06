@@ -14,13 +14,11 @@
 ActiveRecord::Schema.define(version: 20150705080105) do
 
   create_table "flows", force: :cascade do |t|
-    t.string  "name"
-    t.integer "first_position"
+    t.string "name"
   end
 
   create_table "positions", force: :cascade do |t|
-    t.string  "name"
-    t.integer "flow_id"
+    t.string "name"
   end
 
 end

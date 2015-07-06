@@ -1,12 +1,12 @@
 module UseCase
-  class GetPositions
+  class GetFlowPositions
     def initialize(listener:, repository: nil)
       @listener = listener
-      @repository = repository || Repository::PositionMemory.new
+      @repository = repository || Repository::FlowPositionMemory.new
     end
 
-    def get
-      positions = @repository.get
+    def get(flow:)
+      positions = @repository.get(flow: flow)
       if positions
         @listener.get_positions_success(positions)
       end

@@ -14,7 +14,7 @@ describe UseCase::CreateFlow do
       let (:valid_attributes) { { name: "Vinyasa" } }
 
       it 'notifies listener of success' do
-        expect(listener).to receive(:create_flow_success)
+        expect(listener).to receive(:create_flow_success).with(a_kind_of(Flow))
         subject.create(valid_attributes)
       end
 

@@ -1,6 +1,6 @@
 module Repository
   class FlowMemory
-    delegate :create, :count, :clear, to: :@singleton
+    delegate :create, :count, :clear, :first, :find, to: :@singleton
     def initialize
       @singleton = FlowMemorySingleton.instance
     end
@@ -10,6 +10,12 @@ module Repository
 
       def list
         @list ||= []
+      end
+
+      def find(flow)
+        list.first do |listed_flow|
+          flow == listed_flow
+        end
       end
 
       def create(attributes)
