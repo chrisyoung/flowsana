@@ -8,6 +8,10 @@ describe UseCase::CreateTransition do
     let (:from)       { Position.new(  name: "Lotus"  )}
     let (:to)         { Position.new(  name: "Tadasana" )  }
 
+    before do
+      repository.clear
+    end
+
     it 'adds the transition to the repository' do
       subject.create(from: from, to: to)
       expect(repository.count).to eq 1

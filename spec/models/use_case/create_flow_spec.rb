@@ -6,6 +6,10 @@ describe UseCase::CreateFlow do
     let (:listener)   { double(create_flow_success: nil, create_flow_failure: nil) }
     let (:repository) { subject.repository }
 
+    before do
+      repository.clear
+    end
+
     context "With Valid Properties" do
       let (:valid_attributes) { { name: "Vinyasa" } }
 

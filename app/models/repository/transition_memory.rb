@@ -1,23 +1,35 @@
 module Repository
   class TransitionMemory
-    attr_accessor :list
+    delegate :create, :first, :count, :clear, to: :@singleton
+
     def initialize
-      @list     = []
+      @singleton = TransitionMemorySingleton.instance
     end
 
-    def create(attributes)
-      ::Transition.new(attributes).tap do |transition|
-        return unless transition.valid?
-        @list << transition
+    class TransitionMemorySingleton
+      include Singleton
+      def list
+        @list ||= []
       end
-    end
 
-    def first
-      @list.first
-    end
+      def create(attributes)
+        ::Transition.new(attributes).tap do |transition|
+          return unless transition.valid?
+          list << transition
+        end
+      end
 
-    def count
-      @list.count
+      def first
+        list.first
+      end
+
+      def clear
+        @list = []
+      end
+
+      def count
+        list.count
+      end
     end
   end
 end

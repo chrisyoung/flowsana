@@ -13,6 +13,7 @@ describe UseCase::CreateFlowPosition do
 
   describe '#create' do
     it 'adds to the repository' do
+      repository.clear
       subject.create(attributes)
       expect(repository.count).to eq 1
     end

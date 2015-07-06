@@ -25,6 +25,7 @@ describe Repository::FlowPositionMemory do
 
   describe '#count' do
     it 'returns a count of flow positions' do
+      subject.clear
       subject.create(attributes: attributes)
       expect(subject.count).to eq 1
     end
