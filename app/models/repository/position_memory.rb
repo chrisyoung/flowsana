@@ -1,11 +1,17 @@
 module Repository
   class PositionMemory
+    attr_accessor :listener
+
+    def initialize(listener=nil)
+      @listener = listener
+    end
+
     def list
       @list ||= []
     end
 
     def get
-      list
+      @listener.repository_get_success(list) if @listener
     end
 
     def clear

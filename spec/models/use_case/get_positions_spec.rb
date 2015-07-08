@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 describe UseCase::GetPositions do
-  let(:listener) { double }
-  let(:repository) {Repository::PositionMemory.new}
-  let(:position)  { repository.create({name: "Tadasana"}) }
-  subject        { described_class.new(listener: listener, repository: repository) }
+  subject { described_class.new(listener: listener, repository: repository) }
+  let(:listener)   { double('subject listener') }
+  let(:repository) { Repository::PositionMemory.new }
+  let(:position)   { repository.create({name: "Tadasana"}) }
+
 
   describe '#get' do
     it 'notifies the listener' do
