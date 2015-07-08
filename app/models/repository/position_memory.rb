@@ -1,39 +1,30 @@
 module Repository
   class PositionMemory
-    delegate :create, :count, :get, to: :@singleton
-    def initialize
-      @singleton = PositionMemorySingleton.instance
+    def list
+      @list ||= []
     end
 
-    class PositionMemorySingleton
-      include Singleton
+    def get
+      list
+    end
 
-      def list
-        @list ||= []
-      end
+    def clear
+      @list = []
+    end
 
-      def get
-        list
+    def create(attributes)
+      ::Position.new(attributes).tap do |position|
+        return unless position.valid?
+        list << position
       end
+    end
 
-      def clear
-        @list = []
-      end
+    def count
+      list.count
+    end
 
-      def create(attributes)
-        ::Position.new(attributes).tap do |position|
-          return unless position.valid?
-          list << position
-        end
-      end
-
-      def count
-        list.count
-      end
-
-      def first
-        list.first
-      end
+    def first
+      list.first
     end
   end
 end

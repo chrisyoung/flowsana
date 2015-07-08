@@ -1,7 +1,7 @@
 class UseCase::FindFlow
   def initialize(listener:, repository: nil)
     @listener = listener
-    @repository = (repository || Repository::FlowMemory).new
+    @repository = repository || Repository::FlowMemory.new(self)
   end
 
   def find(flow)

@@ -1,41 +1,34 @@
 module Repository
   class FlowPositionMemory
-    delegate :get, :create, :count, :clear, to: :@singleton
-    def initialize
-      @singleton = FlowPositionMemorySingleton.instance
+    def list
+      @list ||= []
     end
 
-    class FlowPositionMemorySingleton
-      include Singleton
-      def list
-        @list ||= []
+    def create(attributes:)
+      ::FlowPosition.new(attributes).tap do |flow_position|
+        return unless flow_position.valid?
+        list << flow_position
       end
-      def create(attributes:)
-        ::FlowPosition.new(attributes).tap do |flow_position|
-          return unless flow_position.valid?
-          list << flow_position
+    end
+
+    def clear
+      @list = []
+    end
+
+    def count
+      list.count
+    end
+
+    def get(flow:)
+      flow_positions(flow)
+    end
+
+    def flow_positions(flow)
+      list.collect do |flow_position|
+        if flow_position.flow == flow
+          flow_position.position
         end
-      end
-
-      def clear
-        @list = []
-      end
-
-      def count
-        list.count
-      end
-
-      def get(flow:)
-        flow_positions(flow)
-      end
-
-      def flow_positions(flow)
-        list.collect do |flow_position|
-          if flow_position.flow == flow
-            flow_position.position
-          end
-        end.compact
-      end
+      end.compact
     end
   end
 end
