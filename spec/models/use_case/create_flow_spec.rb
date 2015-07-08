@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe UseCase::CreateFlow do
   describe '#create' do
-    subject           { described_class.new(listener, Repository::Memory::Flow) }
+    subject           { described_class.new(listener, Repository::Memory::Flow.new) }
     let (:listener)   { double(create_flow_success: nil, create_flow_failure: nil) }
     let (:repository) { subject.repository }
 

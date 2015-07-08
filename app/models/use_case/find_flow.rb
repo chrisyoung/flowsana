@@ -2,6 +2,7 @@ class UseCase::FindFlow
   def initialize(listener:, repository: nil)
     @listener = listener
     @repository = repository || Repository::Memory::Flow.new(self)
+    @repository.listener = self
   end
 
   def find(flow)

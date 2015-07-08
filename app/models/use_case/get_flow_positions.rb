@@ -3,6 +3,7 @@ module UseCase
     def initialize(listener:, repository: nil)
       @listener = listener
       @repository = repository || Repository::Memory::FlowPosition.new
+      @repository.listener = self
     end
 
     def get(flow:)

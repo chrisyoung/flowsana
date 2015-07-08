@@ -1,6 +1,7 @@
 module Repository
   module Memory
     class Transition
+      attr_accessor :listener
       def list
         @list ||= []
       end

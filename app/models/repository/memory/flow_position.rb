@@ -1,6 +1,8 @@
 module Repository
   module Memory
     class FlowPosition
+      attr_accessor :listener
+
       def list
         @list ||= []
       end
