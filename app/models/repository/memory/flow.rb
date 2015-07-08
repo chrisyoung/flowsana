@@ -15,8 +15,12 @@ module Repository
 
       def create(attributes)
         ::Flow.new(attributes).tap do |flow|
-          return unless flow.valid?
-          list << flow
+          if flow.valid?
+            list << flow
+            @listener.repository_create_flow_success(flow) if @listener
+          else
+            @listener.repository_create_flow_failure if @listener
+          end
         end
       end
 
@@ -34,3 +38,13 @@ module Repository
     end
   end
 end
+
+# def repository_create_flow_success
+#   @listener.create_flow_success(flow)
+# end
+
+# def repository_create_flow_failure
+#   @listener.create_flow_failure(flow)
+# end
+
+

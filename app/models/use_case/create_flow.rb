@@ -9,12 +9,15 @@ module UseCase
     end
 
     def create(attributes)
-      flow = @repository.create(attributes)
-      if flow
-        @listener.create_flow_success(flow)
-      else
-        @listener.create_flow_failure(flow)
-      end
+      @repository.create(attributes)
+    end
+
+    def repository_create_flow_success(flow)
+      @listener.create_flow_success(flow)
+    end
+
+    def repository_create_flow_failure
+      @listener.create_flow_failure
     end
   end
 end
