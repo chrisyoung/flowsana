@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Repository::FlowPositionMemory do
+describe Repository::Memory::FlowPosition do
   let(:flow) {double('flow')}
   let(:position) {double('position')}
   let(:attributes) {{flow: flow, position: position}}

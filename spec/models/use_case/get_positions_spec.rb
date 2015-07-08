@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UseCase::GetPositions do
   subject { described_class.new(listener: listener, repository: repository) }
   let(:listener)   { double('subject listener') }
-  let(:repository) { Repository::PositionMemory.new }
+  let(:repository) { Repository::Memory::Position.new }
   let(:position)   { repository.create({name: "Tadasana"}) }
 
 

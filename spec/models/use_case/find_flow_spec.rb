@@ -4,7 +4,7 @@ describe UseCase::FindFlow do
   describe "#find" do
     subject        { described_class.new(listener: listener, repository: repository) }
     let(:listener) { double(find_flow_success: nil)}
-    let(:repository) {Repository::FlowMemory.new}
+    let(:repository) {Repository::Memory::Flow.new}
     let(:flow)     { repository.create(name: "Vinyasa") }
 
     it 'retreives a flow' do

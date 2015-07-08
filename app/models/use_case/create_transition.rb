@@ -4,7 +4,7 @@ module UseCase
 
     def initialize(listener, repository=nil)
       @listener   = listener
-      @repository = (repository || Repository::TransitionMemory).new
+      @repository = (repository || Repository::Memory::Transition).new
     end
 
     def create(attributes)
