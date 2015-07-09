@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe UseCase::GetFlowPositions do
-  subject! {described_class.new(listener: listener, repository: repository)}
-  let     (:listener)   { double('subject listener') }
-  let     (:flow)       { Flow.new( {} ) }
-  let     (:position)   { Position.new({})}
-  let     (:repository) { Repository::Memory::FlowPosition.new }
-  let!    (:flow_position) {repository.create(attributes: {flow: flow, position: position})}
+
+  let     (:listener)      { double('subject listener') }
+  let     (:flow)          { Flow.new({}) }
+  let     (:position)      { Position.new({})}
+  let     (:repository)    { Repository::Memory::FlowPosition.new }
+  let!    (:flow_position) { repository.create(attributes: {flow: flow, position: position})}
+  subject { described_class.new(listener: listener, repository: repository) }
 
   describe "#get" do
     it "gets the flow's positions" do

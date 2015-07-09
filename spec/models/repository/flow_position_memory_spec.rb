@@ -4,8 +4,9 @@ describe Repository::Memory::FlowPosition do
   let(:flow) {double('flow')}
   let(:position) {double('position')}
   let(:attributes) {{flow: flow, position: position}}
+  let(:listener) { double('subject_listener', repository_create_flow_position_success: nil) }
 
-  subject { described_class.new }
+  subject { described_class.new(listener) }
 
   describe '#create' do
     it 'notifies listener of success' do

@@ -3,14 +3,17 @@ module Repository
     class FlowPosition
       attr_accessor :listener
 
-      def list
-        @list ||= []
+      def initialize(listener=nil)
+        @listener = listener
+        @list = []
       end
 
       def create(attributes:)
         ::FlowPosition.new(attributes).tap do |flow_position|
           return unless flow_position.valid?
-          list << flow_position
+          @list << flow_position
+          return unless @listener
+          @listener.repository_create_flow_position_success(flow_position)
         end
       end
 
@@ -19,7 +22,7 @@ module Repository
       end
 
       def count
-        list.count
+        @list.count
       end
 
       def get(flow:)
@@ -27,7 +30,7 @@ module Repository
       end
 
       def flow_positions(flow)
-        list.collect do |flow_position|
+        @list.collect do |flow_position|
           if flow_position.flow == flow
             flow_position.position
           end

@@ -8,9 +8,11 @@ module UseCase
     end
 
     def create(attributes)
-      if repository.create(attributes: attributes)
-        @listener.create_flow_position_success(self)
-      end
+      repository.create(attributes: attributes)
+    end
+
+    def repository_create_flow_position_success(flow_position)
+      @listener.create_flow_position_success(self)
     end
   end
 end
