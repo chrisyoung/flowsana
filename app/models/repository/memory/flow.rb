@@ -28,6 +28,9 @@ module Repository
         end
       end
 
+      def repository_create_flow_success
+      end
+
       def count
         list.count
       end
@@ -38,13 +41,4 @@ module Repository
     end
   end
 end
-
-# def repository_create_flow_success
-#   @listener.create_flow_success(flow)
-# end
-
-# def repository_create_flow_failure
-#   @listener.create_flow_failure(flow)
-# end
-
 
