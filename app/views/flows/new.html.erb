@@ -1,5 +1,8 @@
+<h2>Create a New Flow</h2>
 <%= form_for(@flow) do |form|%>
-  <%= form.label "Name:", for: :name %>
-  <%= form.text_field :name %>
+  <p>
+    <%= form.label "Name:", for: :name %>
+    <%= form.text_field :name %>
+  </p>
   <%= form.submit %>
 <% end %>

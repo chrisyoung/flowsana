@@ -13,6 +13,10 @@ module Repository
         end
       end
 
+      def all
+        @listener.flow_repository_all_success(@list)
+      end
+
       def create(attributes)
         ::Flow.new(attributes).tap do |flow|
           if flow.valid?
@@ -22,10 +26,6 @@ module Repository
             @listener.repository_create_flow_failure if @listener
           end
         end
-      end
-
-      def clear
-        @list = []
       end
 
       def count

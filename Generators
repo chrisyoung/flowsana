@@ -1,0 +1,8 @@
+Rhag.generate model("user")
+  > user.rb
+
+Rhag.generate use_case("create_user", repository: "user")
+  > use_case/create_user.rb
+  > repository/database/user.rb
+  > repository/memory/user.rb
+

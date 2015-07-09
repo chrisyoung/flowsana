@@ -7,8 +7,9 @@ class UseCase::FindFlow
 
   def find(flow)
     found_flow = @repository.find(flow)
-    positions  = Repository::Memory::FlowPosition.new.get(flow: flow)
+
     if found_flow
+      positions  = Repository::Memory::FlowPosition.new.get(flow: flow)
       @listener.find_flow_success(flow: found_flow, positions: positions)
     end
   end

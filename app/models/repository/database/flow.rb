@@ -1,25 +1,39 @@
 module Repository
+  module Database
+    class Flow
+      attr_accessor :listener, :adapter, :model
 
-  class FlowDatabase
-    def create(attributes)
-      ::Flow.new(attributes).tap do |flow|
-        return unless flow.valid?
-        ::Data::Flow.create!(flow.attributes).tap do |flow|
-          flow.id = ar.id
-        end
+      def initialize
+        @adapter  = Repository::Adapters::AR::Flow
+        @model    = ::Flow
       end
-    end
 
-    def count
-      ::Data::Flow.count
-    end
+      def create(attributes)
+        @model.new(attributes).tap do |flow|
+          return unless flow.valid?
+          @adapter.create!(flow.attributes).tap do |flow_data|
+            flow.id = flow_data.id
+            @listener.flow_repository_create_success(flow)
+          end
+        end
 
-    def first
-      ::Data::Flow.first
-    end
+      end
 
-    def find(id: id)
-      Flow.new(::Data::Flow.find(id).attributes)
+      def all
+        @listener.flow_repository_all_success(@adapter.all)
+      end
+
+      def count
+        ::Flow.count
+      end
+
+      def first
+        @adapter.first
+      end
+
+      def find(id: id)
+        ::Flow.new(@adapter.find(id).attributes)
+      end
     end
   end
 end

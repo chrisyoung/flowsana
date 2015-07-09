@@ -5,7 +5,7 @@ describe FlowPosition do
   let (:flow)       { Flow.new({})}
   let (:position)   { Position.new({})}
   let (:attributes) { {flow: flow, position: position} }
-  subject {FlowPosition.new(attributes)}
+  subject { FlowPosition.new(attributes) }
 
   describe("#flow") do
     it {expect(subject.flow).to eq (attributes[:flow])}

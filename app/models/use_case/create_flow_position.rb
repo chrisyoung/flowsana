@@ -1,6 +1,7 @@
 module UseCase
   class CreateFlowPosition
     attr_accessor :repository
+
     def initialize(listener:, repository: nil)
       @listener   = listener
       @repository = repository || Repository::Memory::FlowPosition.new
