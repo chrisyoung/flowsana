@@ -21,6 +21,7 @@ class FlowsController < ApplicationController
 
   ### UseCaseEvents
 
+
   def get_flows_success(flows)
     @flows = flows
   end

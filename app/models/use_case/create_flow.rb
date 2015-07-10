@@ -12,11 +12,12 @@ module UseCase
       @repository.create(attributes)
     end
 
-    def repository_create_flow_success(flow)
+    def flow_repository_create_success(flow)
       @listener.create_flow_success(flow)
     end
 
-    def repository_create_flow_failure
+
+    def flow_repository_create_failure
       @listener.create_flow_failure
     end
   end
