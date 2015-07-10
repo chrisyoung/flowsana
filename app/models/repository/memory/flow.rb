@@ -21,9 +21,9 @@ module Repository
         ::Flow.new(attributes).tap do |flow|
           if flow.valid?
             list << flow
-            @listener.repository_create_flow_success(flow) if @listener
+            @listener.flow_repository_create_success(flow) if @listener
           else
-            @listener.repository_create_flow_failure if @listener
+            @listener.flow_repository_create_failure if @listener
           end
         end
       end
