@@ -12,8 +12,8 @@ module UseCase
       @repository.<%= repository_action %>(attributes)
     end
 
-    def <%= repository_name %>_repository_<%= repository_action %>_success(<%= repository_name %>)
-      @listener.<%= repository_action %>_<%= repository_name %>_success(<%= repository_name %>)
+    def <%= repository_name %>_repository_<%= file_name %>_success(<%= repository_name %>)
+      @listener.<%= repository_action %>_<%= file_name %>_success(<%= repository_name %>)
     end
 
     def <%= repository_name %>_repository_<%= repository_action %>_failure

@@ -9,7 +9,7 @@ describe UseCase::<%= file_name.camelize %> do
     context "With Valid Properties" do
       it 'notifies listener of success' do
         expect(listener).to receive(:<%= file_name %>_success)
-        subject.<%= file_name.split("_").first %>({})
+        subject.<%= file_name.split("_").first %>()
       end
     end
 
