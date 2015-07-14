@@ -1,0 +1,36 @@
+module Repository
+  module Database
+    class <%= repository_name.camelize %>
+      def initialize
+        @adapter  = Repository::Adapters::AR::<%= repository_name.camelize %>
+        @model    = ::<%= repository_name.camelize %>
+      end
+
+      def create(attributes)
+        @model.new(attributes).tap do |<%= repository_name %>|
+          return unless <%= repository_name %>.valid?
+          @adapter.create!(<%= repository_name %>.attributes).tap do |<%= repository_name %>_data|
+            <%= repository_name %>.id = <%= repository_name %>_data.id
+            @listener.<%= repository_name %>_repository_create_success(<%= repository_name %>)
+          end
+        end
+      end
+
+      def all
+        @listener.<%= repository_name %>_repository_all_success(@adapter.all)
+      end
+
+      def count
+        @model.count
+      end
+
+      def first
+        @adapter.first
+      end
+
+      def find(id: id)
+        ::<%= repository_name.camelize %>.new(@adapter.find(id).attributes)
+      end
+    end
+  end
+end
