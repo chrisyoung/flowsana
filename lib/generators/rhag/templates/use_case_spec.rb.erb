@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 describe UseCase::<%= file_name.camelize %> do
-  describe '#create' do
+  describe '<%= file_name.split("_").first %>' do
     subject           { described_class.new(listener, Repository::Memory::<%= repository_name.titleize %>.new) }
     let (:listener)   { double("<%= file_name %> listener", <%= file_name %>_success: nil, <%= file_name %>_failure: nil) }
     let (:repository) { subject.repository }
 
     context "With Valid Properties" do
       it 'notifies listener of success' do
-        expect(listener).to receive(:create_user_success)
-        subject.create({})
+        expect(listener).to receive(:<%= file_name %>_success)
+        subject.<%= file_name.split("_").first %>({})
       end
     end
 
