@@ -1,3 +1,29 @@
+Constraints
+  * No mixins
+  * Uses listener pattern
+  * Don't modify rails
+
+Benefits
+  * Don't throw the baby out with the bathwater
+  * Testing
+  * Portability
+  * Works with rails helpers
+  * Hexagonal Framework for your business logic
+
 TODO
 
-* Write test template for show case
+* Write test template for show_resource
+* Don't mix active_model into models
+* Wrap models in active_model in the rails service
+* Generator to build hexagon in lib
+* Build rails gem for rhag::generators and rhag::rails_helpers
+
+class Rhag::RailsHelpers::WrapActiveModel
+  # Listener
+
+  def wrap(model)
+    active_model make_active_model(model)
+
+    @listener.active_model_wrap_success(active_model)
+  end
+end
