@@ -1,5 +1,6 @@
 class <%= repository_name.camelize %>
   include ActiveModel::Model
+  attr_accessor :attributes
 
   def initialize(attributes={})
     @attributes = attributes
