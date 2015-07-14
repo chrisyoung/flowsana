@@ -1,7 +1,7 @@
 Constraints
-  * No mixins
-  * Uses listener pattern
+  * No mixins, no inheritance
   * Don't modify rails
+  * Uses listener pattern
   * Resourceful
   * Hexagonal
 
@@ -15,7 +15,6 @@ Benefits
 
 TODO
 
-* Write test template for show_resource
 * Don't mix active_model into models
 * Wrap models in active_model in the rails service
 * Generator to build hexagon in lib
