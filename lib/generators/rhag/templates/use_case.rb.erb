@@ -13,11 +13,11 @@ module UseCase
     end
 
     def <%= repository_name %>_repository_<%= repository_action %>_success(<%= repository_name %>)
-      @listener.<%= repository_action %>_<%= file_name %>_success(<%= repository_name %>)
+      @listener.<%= file_name %>_success(<%= repository_name %>)
     end
 
     def <%= repository_name %>_repository_<%= repository_action %>_failure
-      @listener.<%= repository_action %>_<%= file_name %>_failure
+      @listener.<%= file_name %>_failure
     end
   end
 end
