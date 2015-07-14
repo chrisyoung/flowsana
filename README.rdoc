@@ -2,6 +2,8 @@ Constraints
   * No mixins
   * Uses listener pattern
   * Don't modify rails
+  * Resourceful
+  * Hexagonal
 
 Benefits
   * Don't throw the baby out with the bathwater
@@ -9,6 +11,7 @@ Benefits
   * Portability
   * Works with rails helpers
   * Hexagonal Framework for your business logic
+  * Generators
 
 TODO
 
