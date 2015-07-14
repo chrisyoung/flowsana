@@ -1,0 +1,8 @@
+class <%= repository_name.camelize %>
+  include ActiveModel::Model
+
+  def initialize(attributes={})
+    @attributes = attributes
+    super(attributes)
+  end
+end

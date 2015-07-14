@@ -1,0 +1,23 @@
+module UseCase
+  class <%= file_name.camelize %>
+    attr_accessor :repository
+
+    def initialize(listener, repository=nil)
+      @listener   = listener
+      @repository = repository || Repository::Memory::<%= repository_name.titleize %>.new
+      @repository.listener = self
+    end
+
+    def <%= file_name.split('_').first %>(attributes)
+      @repository.<%= repository_action %>(attributes)
+    end
+
+    def <%= repository_name %>_repository_<%= repository_action %>_success(<%= repository_name %>)
+      @listener.<%= repository_action %>_<%= repository_name %>_success(<%= repository_name %>)
+    end
+
+    def <%= repository_name %>_repository_<%= repository_action %>_failure
+      @listener.<%= repository_action %>_<%= repository_name %>_failure
+    end
+  end
+end
