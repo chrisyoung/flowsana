@@ -8,8 +8,8 @@ module Repository
         @list = []
       end
 
-      def create(attributes:)
-        ::FlowPosition.new(attributes).tap do |flow_position|
+      def create(flow:, position:)
+        ::FlowPosition.new(flow: flow, position: position).tap do |flow_position|
           return unless flow_position.valid?
           @list << flow_position
           return unless @listener

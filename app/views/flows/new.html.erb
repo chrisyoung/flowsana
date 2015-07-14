@@ -1,8 +1,19 @@
 <h2>Create a New Flow</h2>
+
 <%= form_for(@flow) do |form|%>
   <p>
     <%= form.label "Name:", for: :name %>
     <%= form.text_field :name %>
   </p>
+
+  <%= fields_for(@position) do |position| %>
+    <p>
+      <%= position.label "First Position:", for: :name %>
+      <%= position.text_field :name %>
+    </p>
+  <% end %>
+
   <%= form.submit %>
 <% end %>
+
+

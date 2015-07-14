@@ -8,8 +8,8 @@ module UseCase
       @repository.listener = self
     end
 
-    def create(attributes)
-      repository.create(attributes: attributes)
+    def create(flow:, position:)
+      repository.create(flow: flow, position: position)
     end
 
     def repository_create_flow_position_success(flow_position)

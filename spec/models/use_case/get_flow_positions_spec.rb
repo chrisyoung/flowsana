@@ -6,7 +6,7 @@ describe UseCase::GetFlowPositions do
   let     (:flow)          { Flow.new({}) }
   let     (:position)      { Position.new({}) }
   let     (:repository)    { Repository::Memory::FlowPosition.new }
-  let!    (:flow_position) { repository.create(attributes: {flow: flow, position: position}) }
+  let!    (:flow_position) { repository.create(flow: flow, position: position) }
 
   describe "#get" do
     it "gets the flow's positions" do

@@ -28,9 +28,6 @@ module Repository
         end
       end
 
-      def repository_create_flow_success
-      end
-
       def count
         list.count
       end
