@@ -5,7 +5,6 @@ class PositionTransitionsController < ApplicationController
   end
 
   def transition_from_many_positions_to_one_success(transitions)
-    binding.pry
   end
 
   private
