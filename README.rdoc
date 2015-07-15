@@ -15,6 +15,7 @@ Benefits
 
 TODO
 
+* Support parameters on generator
 * Don't mix active_model into models
 * Wrap models in active_model in the rails service
 * Generator to build hexagon in lib
