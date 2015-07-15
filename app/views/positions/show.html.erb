@@ -1,0 +1,14 @@
+<%= link_to "All Positions", positions_path %>
+<h1><%= @position.name %></h1>
+
+<h2>Flows from</h2>
+
+<% @position.froms.each do |position| %>
+  <div> <%= position %> </div>
+<% end %>
+
+<% if @position.froms.empty?  %>
+  <div> What positions does this flow from? </div>
+<% end %>
+
+<%= render "froms", from: @positions, to: @position %>

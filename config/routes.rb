@@ -55,5 +55,7 @@ Rails.application.routes.draw do
   #   end
 
   resources :flows
-  resources :positions
+  resources :positions do
+    resources :transitions, controller: :position_transitions
+  end
 end

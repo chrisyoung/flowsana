@@ -1,0 +1,11 @@
+<%= form_for :transition, url:  position_transitions_path(to.id) do |f| %>
+  <% from.each do |position| %>
+    <div>
+      <%= fields_for :from do |from| %>
+        <%= from.check_box position.id %>
+        <%= position.name %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,4 @@
+<%= link_to "New Position", new_position_path %>
+<% @positions.each do |position| %>
+  <div><%= link_to(position.name, position_path(position.id)) %></div>
+<% end %>

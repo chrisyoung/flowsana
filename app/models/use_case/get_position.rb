@@ -1,5 +1,5 @@
 module UseCase
-  class CreatePosition
+  class GetPosition
     attr_accessor :repository
 
     def initialize(listener, repository=nil)
@@ -8,12 +8,16 @@ module UseCase
       @repository.listener = self
     end
 
-    def create(attributes)
-      @repository.create(attributes)
+    def get(id)
+      @repository.read(id)
     end
 
-    def position_repository_create_success(position)
-      @listener.create_position_success(position)
+    def position_repository_read_success(position)
+      @listener.get_position_success(position)
+    end
+
+    def position_repository_read_failure
+      @listener.get_position_failure
     end
   end
 end
