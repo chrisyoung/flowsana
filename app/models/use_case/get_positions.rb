@@ -1,7 +1,7 @@
 module UseCase
   class GetPositions
 
-    def initialize(listener:, repository: nil)
+    def initialize(listener, repository = nil)
       @listener            = listener
       @repository          = repository || Repository::Memory::Position.new
       @repository.listener = self
