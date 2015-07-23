@@ -14,10 +14,9 @@ module Repository
 
       def create(attributes)
         ::Position.new(attributes).tap do |position|
-          if position.valid?
-            listener.position_repository_create_success(
-              Repository::Adapters::AR::Position.create!(attributes))
-          end
+          return unless position.valid?
+          listener.position_repository_create_success(
+            Repository::Adapters::AR::Position.create!(attributes))
         end
       end
 
