@@ -8,8 +8,8 @@ module UseCase
       @repository.listener = self
     end
 
-    def list
-      @repository.list
+    def list(position)
+      @repository.list(position)
     end
 
     def transition_repository_list_success(transition)

@@ -10,7 +10,6 @@ class PositionsController < ApplicationController
   def edit
     UseCase::GetPosition.new(self, position_repository).get(params[:id])
     UseCase::GetPositions.new(self, position_repository).all
-    UseCase::ListTransitionsFor.new(self, transition_repository).list
   end
 
   def new
@@ -19,6 +18,7 @@ class PositionsController < ApplicationController
 
   def get_position_success(position)
     @position = position
+    UseCase::ListTransitionsFor.new(self, transition_repository).list(@position)
   end
 
   def create_position_success(position)

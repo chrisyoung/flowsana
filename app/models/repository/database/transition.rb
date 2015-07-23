@@ -17,8 +17,8 @@ module Repository
         end
       end
 
-      def list
-        @listener.transition_repository_list_success(@adapter.all)
+      def list(position)
+        @listener.transition_repository_list_success(@adapter.find_by_from_id(position.id))
       end
 
       def count
