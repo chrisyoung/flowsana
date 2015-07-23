@@ -1,6 +1,6 @@
 module Repository
   module Adapters
-    module ActiveRecord
+    module AR
       class Position < ActiveRecord::Base
         belongs_to :flow
       end

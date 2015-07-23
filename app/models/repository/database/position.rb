@@ -1,10 +1,24 @@
 module Repository
   module Database
-    class PositionDatabase
+    class Position
+      attr_accessor :listener, :adapter, :model
+
+      def initialize
+        @adapter  = Repository::Adapters::AR::Position
+        @model    = ::Position
+      end
+
+      def get
+        @listener.repository_get_success(adapter.all) if @listener
+      end
+
       def create(attributes)
-        ::Position.new(self, attributes).tap do |position|
+        ::Position.new(attributes).tap do |position|
           if position.valid?
-            ::Data::Position.create!(position.attributes)
+            listener.position_repository_create_success(
+              Repository::Adapters::AR::Position.create!(attributes))
+          end
+        end
       end
 
       def count

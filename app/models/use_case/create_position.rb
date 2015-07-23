@@ -8,10 +8,12 @@ module UseCase
       @repository.listener = self
     end
 
+    def position_repository_create_success(position)
+      @listener.create_position_success(position)
+    end
+
     def create(attributes)
-      if @repository.create(attributes)
-        @listener.create_position_success
-      end
+      @repository.create(attributes)
     end
   end
 end
