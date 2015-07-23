@@ -1,7 +1,7 @@
 class Position
   include ActiveModel::Model
 
-  attr_accessor :name, :repository, :to_transitions, :from_transitions, :attributes
+  attr_accessor :id, :name, :repository, :to_transitions, :from_transitions, :attributes
 
   def initialize(attributes=nil)
     @to_transitions   = []

@@ -8,8 +8,14 @@ module Repository
         @model    = ::Position
       end
 
-      def get
+      def list
         @listener.repository_get_success(adapter.all) if @listener
+      end
+
+      def get(id)
+        position = Repository::Adapters::AR::Position.find(id)
+        return unless position
+        @listener.position_repository_get_success(::Position.new(position.attributes))
       end
 
       def create(attributes)

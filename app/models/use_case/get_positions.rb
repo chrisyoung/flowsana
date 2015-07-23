@@ -7,8 +7,8 @@ module UseCase
       @repository.listener = self
     end
 
-    def get
-      @repository.get
+    def all
+      @repository.list
     end
 
     def repository_get_success(positions)
