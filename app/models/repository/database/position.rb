@@ -4,7 +4,7 @@ module Repository
       attr_accessor :listener, :adapter, :model
 
       def initialize
-        @adapter  = Repository::Adapters::AR::Position
+        @adapter  = Repository::Adapters::AR::Position.new
         @model    = ::Position
       end
 
@@ -13,25 +13,11 @@ module Repository
       end
 
       def get(id)
-        position = Repository::Adapters::AR::Position.find(id)
-        return unless position
-        @listener.position_repository_get_success(::Position.new(position.attributes))
+        @listener.position_repository_get_success(adapter.find(id))
       end
 
       def create(attributes)
-        ::Position.new(attributes).tap do |position|
-          return unless position.valid?
-          listener.position_repository_create_success(
-            Repository::Adapters::AR::Position.create!(attributes))
-        end
-      end
-
-      def count
-        ::Data::Position.count
-      end
-
-      def first
-        ::Data::Position.first
+        listener.position_repository_create_success(adapter.create(attributes))
       end
     end
   end

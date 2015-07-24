@@ -1,6 +1,6 @@
 <h1>Positions</h1>
 <ul>
-<% @positions.each do |position| %>
-  <li><%= link_to(position.name, edit_position_path(position)) %></li>
-<% end %>
+  <% @positions.each do |position| %>
+    <li><%= link_to(position.name, edit_position_path(position.id)) %></li>
+  <% end %>
 </ul>
