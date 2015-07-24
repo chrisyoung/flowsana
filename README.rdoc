@@ -15,6 +15,8 @@ Benefits
 
 TODO
 
+* Add a dsl for listener callbacks, ie: listens_for: :message, might make assignments automatically.
+* Add new adapter style to generators (see Adapters::AR::Position)
 * Support parameters on generator
 * Don't mix active_model into models
 * Wrap models in active_model in the rails service
