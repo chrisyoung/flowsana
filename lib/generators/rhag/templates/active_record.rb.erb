@@ -1,8 +1,4 @@
-module Repository
-  module Adapters
-    module AR
-      class <%= repository_name.camelize %> < ActiveRecord::Base
-      end
-    end
+Repository::Adapters::AR::Data
+  class <%= repository_name.camelize %> < ActiveRecord::Base
   end
 end
