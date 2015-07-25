@@ -1,0 +1,23 @@
+module Repository::Adapters::AR
+  class <%= repository_name.camelize %>
+    def initialize(listener)
+      @listener = listener
+      @data     = Repository::Adapters::AR::Data::<%= repository_name.camelize %>
+    end
+
+    def find(id)
+      @listener.<%= repository_name %>_adapter_find_success(
+        ::<%= repository_name.camelize %>.new(@data.find(id).attributes))
+    end
+
+    def create(attributes)
+      @listener.<%= repository_name %>_adapter_create_success(
+        ::<%= repository_name.camelize %>.new(@data.create(attributes).attributes))
+    end
+
+    def all
+      @listener.<%= repository_name %>_adapter_all_success(
+        @data.all.map {|<%= repository_name %>| ::<%= repository_name.camelize %>.new(<%= repository_name %>.attributes)})
+    end
+  end
+end
