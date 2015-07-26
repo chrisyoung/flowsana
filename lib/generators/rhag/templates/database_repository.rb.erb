@@ -1,8 +1,8 @@
 module Repository
   module Database
     class <%= repository_name.camelize %>
-      attr_accessor :listener
-      def initialize
+      def initialize(listener = nil)
+        @listener = listener
         @adapter  = Repository::Adapters::AR::<%= repository_name.camelize %>
         @model    = ::<%= repository_name.camelize %>
       end
