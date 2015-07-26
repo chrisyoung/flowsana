@@ -12,8 +12,8 @@ module UseCase
       @repository.list(position)
     end
 
-    def transition_repository_list_success(transition)
-      @listener.list_transitions_for_success(transition)
+    def transition_repository_list_success(transitions)
+      @listener.list_transitions_for_success(transitions)
     end
 
     def transition_repository_list_failure

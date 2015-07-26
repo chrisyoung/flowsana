@@ -9,6 +9,10 @@ class Position
     super(attributes)
   end
 
+  def persisted?
+    id.present?
+  end
+
   def to_positions
     to_transitions.map { |transition| transition.to }
   end
