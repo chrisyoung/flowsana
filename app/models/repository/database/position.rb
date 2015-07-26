@@ -13,10 +13,6 @@ module Repository
         adapter.all
       end
 
-      def position_adapter_all_success(position)
-        @listener.repository_get_success(position)
-      end
-
       def get id
         adapter.find(id)
       end
@@ -39,6 +35,10 @@ module Repository
 
       def position_adapter_find_success position
         @listener.position_repository_get_success position
+      end
+
+      def position_adapter_all_success(position)
+        @listener.repository_get_success(position)
       end
     end
   end
