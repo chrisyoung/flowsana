@@ -15,11 +15,18 @@ module Rhag
       adapter:             "repository/adapters/ar/" }
 
     def copy_use_case_file
-      template "use_case.rb.erb", "#{ROOT_PATH}/use_case/#{file_name}.rb"
-      template "use_case_spec.rb.erb", "#{TEST_ROOT_PATH}/use_case/#{file_name}_spec.rb"
+      puts "### USE CASE"
 
+      template "use_case.rb.erb", "#{ROOT_PATH}/use_case/#{file_name}.rb"
+
+      puts "### DOMAIN MODEL AND REPOSITORIES"
       PATHS.keys.each do |fname|
         template "#{fname.to_s}.rb.erb", "#{ROOT_PATH}#{PATHS[fname]}#{repository_name}.rb"
+      end
+
+      puts "### TESTS"
+      template "use_case_spec.rb.erb", "#{TEST_ROOT_PATH}/use_case/#{file_name}_spec.rb"
+      PATHS.keys.each do |fname|
         template "#{fname.to_s}_spec.rb.erb", "#{TEST_ROOT_PATH}#{PATHS[fname]}#{repository_name.to_s}_spec.rb"
       end
     end
