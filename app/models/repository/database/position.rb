@@ -12,16 +12,24 @@ module Repository
         adapter.all
       end
 
+      def position_adapter_all_success(position)
+        listener.repository_get_success(position)
+      end
+
       def get id
         adapter.find(id)
+      end
+
+      def update(position, attributes)
+        adapter.update(position, attributes)
       end
 
       def create attributes
         adapter.create(attributes)
       end
 
-      def position_adapter_all_success positions
-        listener.repository_get_success positions
+      def position_adapter_update_success position
+        listener.position_repository_update_success(position)
       end
 
       def position_adapter_create_success position

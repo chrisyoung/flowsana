@@ -6,4 +6,8 @@ class <%= repository_name.camelize %>
     @attributes = attributes
     super(attributes)
   end
+
+  def persisted?
+    id.present?
+  end
 end
