@@ -30,15 +30,15 @@ module Repository
       end
 
       def position_adapter_update_success position
-        listener.position_repository_update_success(position)
+        @listener.position_repository_update_success(position)
       end
 
       def position_adapter_create_success position
-        listener.position_repository_create_success position
+        @listener.position_repository_create_success position
       end
 
       def position_adapter_find_success position
-        listener.position_repository_get_success position
+        @listener.position_repository_get_success position
       end
     end
   end
