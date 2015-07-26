@@ -1,11 +1,12 @@
 module Repository
   module Database
     class Position
-      attr_accessor :listener, :adapter, :model
+      attr_accessor :adapter, :model
 
-      def initialize
+      def initialize(listener)
         @adapter = Repository::Adapters::AR::Position.new(self)
         @model   = ::Position
+        @listener = listener
       end
 
       def list
@@ -13,7 +14,7 @@ module Repository
       end
 
       def position_adapter_all_success(position)
-        listener.repository_get_success(position)
+        @listener.repository_get_success(position)
       end
 
       def get id

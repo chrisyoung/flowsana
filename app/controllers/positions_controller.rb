@@ -49,7 +49,7 @@ class PositionsController < ApplicationController
   end
 
   def position_repository
-    Repository::Database::Position.new
+    Repository::Database::Position
   end
 
   def transition_repository
