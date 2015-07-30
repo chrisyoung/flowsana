@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def repository
     Repository::Database
   end
+
+  def self.listen_for(message, &block)
+    send :define_method, message, &block
+  end
 end
