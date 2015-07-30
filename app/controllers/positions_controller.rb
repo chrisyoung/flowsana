@@ -1,4 +1,10 @@
 class PositionsController < ApplicationController
+  listen_for(:get_position_success)         { |position| @position = position }
+  listen_for(:create_position_success)      { |position| redirect_to positions_path }
+  listen_for(:get_positions_success)        { |positions| @positions = positions }
+  listen_for(:list_transitions_for_success) { |transitions| @transitions = transitions }
+  listen_for(:update_position_success)      { |position| redirect_to positions_path }
+
   def index
     UseCase::GetPositions.new(self, position_repository).all
   end
@@ -20,26 +26,6 @@ class PositionsController < ApplicationController
   def update
     UseCase::GetPosition.new(self, position_repository).get(params[:id])
     UseCase::UpdatePosition.new(self, position_repository).update(@position, position_params)
-  end
-
-  def get_position_success(position)
-    @position = position
-  end
-
-  def create_position_success(position)
-    redirect_to positions_path
-  end
-
-  def get_positions_success(positions)
-    @positions = positions
-  end
-
-  def list_transitions_for_success(transitions)
-    @transitions = transitions
-  end
-
-  def update_position_success(position)
-    redirect_to positions_path
   end
 
   private
