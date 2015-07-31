@@ -32,12 +32,12 @@ private
   listen_for(:create_to_transitions_success) { |t| }
 
   def init_use_cases
-    {list_transitions_for:  UseCase::ListTransitionsFor.new self, transition_repo,
-        create_position:       UseCase::CreatePosition.new self, position_repo,
-        get_positions:         UseCase::GetPositions.new self, position_repo,
-        get_position:          UseCase::GetPosition.new self, position_repo,
-        update_position:       UseCase::UpdatePosition.new self, position_repo,
-        create_to_transitions: UseCase::CreateToTransitions.new self, transition_repo}
+    @list_transitions_for  = UseCase::ListTransitionsFor.new self, transition_repo
+    @create_position       = UseCase::CreatePosition.new self, position_repo
+    @get_positions         = UseCase::GetPositions.new self, position_repo
+    @get_position          = UseCase::GetPosition.new self, position_repo
+    @update_position       = UseCase::UpdatePosition.new self, position_repo
+    @create_to_transitions = UseCase::CreateToTransitions.new self, transition_repo
   end
 
   def get_new_position
