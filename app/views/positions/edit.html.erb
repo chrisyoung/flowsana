@@ -6,7 +6,7 @@
   <ul>
     <% @positions.each do |position| %>
         <li>
-          <input type="checkbox" name="position[to_transitions][]" value="<%= position.id %>" />
+          <input type="checkbox" name="transitions[][to]" value="<%= position.id %>" />
           <%= link_to(position.name, edit_position_path(position.id)) %>
         </li>
 

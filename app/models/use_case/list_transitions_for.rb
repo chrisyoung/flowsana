@@ -4,8 +4,8 @@ module UseCase
 
     def initialize(listener, repository=nil)
       @listener   = listener
-      @repository = repository || Repository::Memory::Transition.new
-      @repository.listener = self
+      @repository = repository.new(self) || Repository::Memory::Transition.new(self)
+
     end
 
     def list(position)

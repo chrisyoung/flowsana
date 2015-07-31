@@ -3,9 +3,9 @@ module Repository
     class Position
       attr_accessor :adapter, :model
 
-      def initialize(listener)
-        @adapter = Repository::Adapters::AR::Position.new(self)
-        @model   = ::Position
+      def initialize listener
+        @adapter  = Repository::Adapters::AR::Position.new self
+        @model    = ::Position
         @listener = listener
       end
 
@@ -14,19 +14,19 @@ module Repository
       end
 
       def get id
-        adapter.find(id)
+        adapter.find id
       end
 
-      def update(position, attributes)
-        adapter.update(position, attributes)
+      def update position, attributes
+        adapter.update position, attributes
       end
 
       def create attributes
-        adapter.create(attributes)
+        adapter.create attributes
       end
 
       def position_adapter_update_success position
-        @listener.position_repository_update_success(position)
+        @listener.position_repository_update_success position
       end
 
       def position_adapter_create_success position
@@ -37,8 +37,8 @@ module Repository
         @listener.position_repository_get_success position
       end
 
-      def position_adapter_all_success(position)
-        @listener.repository_get_success(position)
+      def position_adapter_all_success position
+        @listener.repository_get_success position
       end
     end
   end

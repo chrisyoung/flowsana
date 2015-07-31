@@ -1,10 +1,10 @@
 module Repository
   module Database
     class Transition
-      attr_accessor :listener
-      def initialize
+      def initialize(listener)
         @adapter  = Repository::Adapters::AR::Transition
         @model    = ::Transition
+        @listener = listener
       end
 
       def create(attributes)
@@ -18,7 +18,11 @@ module Repository
       end
 
       def list(position)
-        @listener.transition_repository_list_success(@adapter.find_by_from_id(position.id))
+        @listener.transition_repository_list_success(
+          @adapter.where(from_id: position.id).map do |ar_transition|
+            ::Transition.new(ar_transition.attributes)
+          end
+        )
       end
 
       def count
