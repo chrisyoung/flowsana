@@ -4,12 +4,13 @@
 
   <h1>Positions</h1>
   <ul>
-  <% @positions.each do |position| %>
-    <li>
-      <%= check_box_tag("position[]", position.id, false, id: dom_id(position)) %>
-      <%= link_to(position.name, edit_position_path(position.id)) %>
-    </li>
-  <% end %>
+    <% @positions.each do |position| %>
+        <li>
+          <input type="checkbox" name="position[to_transitions][]" value="<%= position.id %>" />
+          <%= link_to(position.name, edit_position_path(position.id)) %>
+        </li>
+
+    <% end %>
   </ul>
 
   <%= f.submit %>
