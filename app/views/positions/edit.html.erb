@@ -3,6 +3,13 @@
   <%= f.text_field :name %>
 
   <h1>Positions</h1>
+
+  <ul>
+  <% @transitions.each do |t| %>
+    <li><%=t.to.name%></li>
+  <% end %>
+  </ul>
+
   <ul>
     <% @positions.each do |position| %>
         <li>

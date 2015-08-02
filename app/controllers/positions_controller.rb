@@ -45,11 +45,11 @@ private
   end
 
   def position_params
-    params.require(:position).permit :name, :to_transitions => []
+    params.require(:position).permit :name
   end
 
   def transitions_params
-    params.require :transitions
+    params.require(:transitions)
   end
 
   def position_repo
