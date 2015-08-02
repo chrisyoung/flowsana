@@ -1,25 +1,25 @@
 class PositionsController < ApplicationController
-  before_filter :init_use_cases
   before_filter :get_new_position, only: :new
+  before_filter -> { @use_cases = Rhag.new(self) }
 
   def index
-    @get_positions.all
+    @use_cases[:get_positions].all
   end
 
   def create
-    @create_position.create position_params
+    @use_cases[:create_position].create position_params
   end
 
   def edit
-    @get_position.get params[:id]
-    @get_positions.all
-    @list_transitions_for.list @position
+    @use_cases[:get_position].get params[:id]
+    @use_cases[:get_positions].all
+    @use_cases[:list_transitions_for, repo: 'transition'].list @position
   end
 
   def update
-    @get_position.get params[:id]
-    @update_position.update @position, position_params
-    @create_to_transitions.create @position, transitions_params
+    @use_cases[:get_position].get params[:id]
+    @use_cases[:update_position].update @position, position_params
+    @use_cases[:create_to_transitions, repo: 'transition'].create @position, transitions_params
   end
 
 private
@@ -31,15 +31,6 @@ private
   listen_for(:create_position_success)       { |p| redirect_to positions_path }
   listen_for(:create_to_transitions_success) { |t| }
 
-  def init_use_cases
-    @list_transitions_for  = UseCase::ListTransitionsFor.new self, transition_repo
-    @create_position       = UseCase::CreatePosition.new self, position_repo
-    @get_positions         = UseCase::GetPositions.new self, position_repo
-    @get_position          = UseCase::GetPosition.new self, position_repo
-    @update_position       = UseCase::UpdatePosition.new self, position_repo
-    @create_to_transitions = UseCase::CreateToTransitions.new self, transition_repo
-  end
-
   def get_new_position
     @position = Position.new
   end
@@ -50,13 +41,5 @@ private
 
   def transitions_params
     params.require(:transitions)
-  end
-
-  def position_repo
-    Repository::Database::Position
-  end
-
-  def transition_repo
-    Repository::Database::Transition
   end
 end
