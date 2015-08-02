@@ -1,34 +1,43 @@
+FLOWSANA
+
+RHAG
+Rhag is an experiment with Hexagonal Architecture and Ruby on Rails.
+Don't throw the baby out with the bathwater
+
+Flowsana
+
+
 Constraints
   * No mixins, no inheritance
-  * Don't modify rails
   * Uses listener pattern
   * Resourceful
   * Hexagonal
 
 Benefits
-  * Don't throw the baby out with the bathwater
-  * Testing
-  * Portability
-  * Works with rails helpers
   * Hexagonal Framework for your business logic
+  * Testable
+  * Maintainable
+  * Navicable
+  * Portability
+  * Works with Rails (uses active_model)
+
   * Generators
 
 TODO
 
-* Add a dsl for listener callbacks, ie: listens_for: :message, might make assignments automatically.
-* Add new adapter style to generators (see Adapters::AR::Position)
 * Support parameters on generator
 * Don't mix active_model into models
 * Wrap models in active_model in the rails service
 * Generator to build hexagon in lib
 * Build rails gem for rhag::generators and rhag::rails_helpers
 
-class Rhag::RailsHelpers::WrapActiveModel
-  # Listener
+Consider:
+  class Rhag::RailsHelpers::WrapActiveModel
+    # Listener
 
-  def wrap(model)
-    active_model make_active_model(model)
+    def wrap(model)
+      active_model make_active_model(model)
 
-    @listener.active_model_wrap_success(active_model)
+      @listener.active_model_wrap_success(active_model)
+    end
   end
-end
