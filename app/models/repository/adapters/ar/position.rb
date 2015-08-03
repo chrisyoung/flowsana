@@ -6,8 +6,13 @@ module Repository::Adapters::AR
     end
 
     def find(id)
+      result = @data.find(id)
       @listener.position_adapter_find_success(
-        ::Position.new(@data.find(id).attributes))
+        ::Position.new(result.attributes).tap do |position|
+          position.to_transitions = result.to_transitions
+          position.from_transitions = result.from_transitions
+        end
+      )
     end
 
     def create(attributes)
@@ -17,6 +22,7 @@ module Repository::Adapters::AR
 
     def update(position, attributes)
       ar_position = @data.find(position.id)
+      to_transitions = attributes.delete(:to_transitions)
       ar_position.update_attributes(attributes)
       @listener.position_adapter_update_success(
         ::Position.new(ar_position.attributes)

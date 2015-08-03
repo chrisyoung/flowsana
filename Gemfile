@@ -47,3 +47,4 @@ gem "rspec-rails", :group => [:development, :test]
 gem 'pry'
 gem 'guard-rspec'
 gem "activemodel"
+gem "twitter-bootstrap-rails"

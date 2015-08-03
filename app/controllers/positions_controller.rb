@@ -13,13 +13,12 @@ class PositionsController < ApplicationController
   def edit
     @use_cases[:get_position].get params[:id]
     @use_cases[:get_positions].all
-    @use_cases[:list_transitions_for, repo: 'transition'].list @position
   end
 
   def update
     @use_cases[:get_position].get params[:id]
     @use_cases[:update_position].update @position, position_params
-    @use_cases[:create_to_transitions, repo: 'transition'].create @position, transitions_params
+    @use_cases[:create_to_transitions, repo: 'transition'].create @position, position_params[:to_transitions]
   end
 
 private
@@ -29,17 +28,13 @@ private
   listen_for(:list_transitions_for_success)  { |t| @transitions = t }
   listen_for(:update_position_success)       { |p| redirect_to positions_path }
   listen_for(:create_position_success)       { |p| redirect_to positions_path }
-  listen_for(:create_to_transitions_success) { |t| }
+  listen_for(:create_to_transitions_success) { |t| @transitions = t}
 
   def get_new_position
     @position = Position.new
   end
 
   def position_params
-    params.require(:position).permit :name
-  end
-
-  def transitions_params
-    params.require(:transitions)
+    params.require(:position).permit :name, :to_transitions => [:to]
   end
 end

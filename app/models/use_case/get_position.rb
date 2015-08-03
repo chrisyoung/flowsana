@@ -5,7 +5,6 @@ module UseCase
     def initialize(listener, repository=nil)
       @listener   = listener
       @repository = repository.new(self) || Repository::Memory::Position.new
-
     end
 
     def get(id)

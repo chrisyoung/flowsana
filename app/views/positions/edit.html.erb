@@ -1,24 +1,48 @@
-<%= form_for(@position) do |f| %>
-  <%= f.label "Name", for: :name %>
-  <%= f.text_field :name %>
+<div class="container">
+  <h1>Edit Position</h1>
 
-  <h1>Positions</h1>
+  <%= form_for(@position) do |f| %>
+    <div class="col-md-12">
+      <%= f.label "Name", for: :name %>
+      <%= f.text_field :name %>
+    </div>
 
-  <ul>
-  <% @transitions.each do |t| %>
-    <li><%=t.to.name%></li>
+    <div class="col-md-6">
+      <h2>Flows to</h2>
+      <ul>
+        <% @position.to_transitions.each do |t| %>
+          <li><%=t.to.name%></li>
+        <% end %>
+      </ul>
+
+      <ul>
+        <% @positions.each do |position| %>
+          <li>
+            <input type="checkbox" name="position[to_transitions][][to]" value="<%= position.id %>" />
+            <%= link_to(position.name, edit_position_path(position.id)) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h2>Flows from</h2>
+      <ul>
+        <% @position.from_transitions.each do |t| %>
+          <li><%=t.from.name%></li>
+        <% end %>
+      </ul>
+      <ul>
+        <% @positions.each do |position| %>
+          <li>
+            <input type="checkbox" name="transitions[][from]" value="<%= position.id %>" />
+            <%= link_to(position.name, edit_position_path(position.id)) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit %>
+    </div>
   <% end %>
-  </ul>
-
-  <ul>
-    <% @positions.each do |position| %>
-        <li>
-          <input type="checkbox" name="transitions[][to]" value="<%= position.id %>" />
-          <%= link_to(position.name, edit_position_path(position.id)) %>
-        </li>
-    <% end %>
-  </ul>
-
-  <%= f.submit %>
-<% end %>
-
+</div>
