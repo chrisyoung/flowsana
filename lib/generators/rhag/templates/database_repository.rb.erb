@@ -3,7 +3,7 @@ module Repository
     class <%= repository_name.camelize %>
       def initialize(listener = nil)
         @listener = listener
-        @adapter  = Repository::Adapters::AR::<%= repository_name.camelize %>
+        @adapter  = Repository::Adapters::AR::<%= repository_name.camelize %>.new(self)
         @model    = ::<%= repository_name.camelize %>
       end
 
