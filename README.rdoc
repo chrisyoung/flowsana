@@ -1,38 +1,40 @@
-FLOWSANA
-
-RHAG
-Rhag is an experiment with Hexagonal Architecture and Ruby on Rails.
+HOROR - Hexagonal Architecture on Ruby on Rails.
 Don't throw the baby out with the bathwater
-
-Flowsana
-
 
 Constraints
   * No mixins, no inheritance
+  * Repositories are always CRUD
+  * One usecase, one repository
   * Uses listener pattern
   * Resourceful
   * Hexagonal
 
 Benefits
-  * Hexagonal Framework for your business logic
-  * Testable
+  * Driven by use cases
+  * Active Record is isolated
+  * Easily Testable
   * Maintainable
   * Navicable
-  * Portability
-  * Works with Rails (uses active_model)
-
+  * Portable
+  * Works with Rails
+  * listener helper for controllers
+  * HOROR::UseCase makes it easy to call use cases
   * Generators
 
 TODO
-
-* Support parameters on generator
-* Don't mix active_model into models
-* Wrap models in active_model in the rails service
-* Generator to build hexagon in lib
-* Build rails gem for rhag::generators and rhag::rails_helpers
+  * Rename RHAG to HOROR
+  * Move HOROR code into its own repo
+  * Consider horor gem and horor_rails gem
+  * Move Repository::Adapters to Repository::Database::Adapters
+  * Support parameters on generator
+  * Don't mix active_model into models
+  * Wrap models in active_model in the rails service
+  * Generator to build hexagon in lib
+  * Build rails gem for horor::generators and horor::rails_helpers
 
 Consider:
-  class Rhag::RailsHelpers::WrapActiveModel
+
+  class HOROR::RailsHelpers::WrapActiveModel
     # Listener
 
     def wrap(model)
