@@ -12,7 +12,7 @@ module Repository::Adapters::AR
 
     def create(attributes)
       @listener.available_position_adapter_create_success(
-        make_model(@data.create(attributes))
+        make_model(@data.create(attributes)))
     end
 
     def all(position)

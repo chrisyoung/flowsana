@@ -36,6 +36,8 @@ private
   end
 
   def position_params
-    params.require(:position).permit :name, :to_transitions => [:to_id, :from_id]
+    params.require(:position).permit :name,
+      :to_transitions => [:to_id, :from_id],
+      :from_transitions => [:to_id, :from_id]
   end
 end

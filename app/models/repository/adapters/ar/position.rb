@@ -8,11 +8,12 @@ module Repository::Adapters::AR
 
     def find(id)
       result = @position_data.find(id)
-      @listener.send :position_adapter_find_success,
-        make_model(result).tap do |position|
-          position.to_transitions   = result.to_transitions
-          position.from_transitions = result.from_transitions
-        end
+
+      position = make_model(result)
+      position.to_transitions   = result.to_transitions
+      position.from_transitions = result.from_transitions
+
+      @listener.send :position_adapter_find_success, position
     end
 
     def create(attributes)
@@ -42,7 +43,8 @@ module Repository::Adapters::AR
     end
 
     def normalize_attributes(attributes)
-      attributes[:to_transitions_attributes] = attributes.delete!(:to_transitions)
+      attributes[:to_transitions_attributes] = attributes.delete(:to_transitions) || []
+      attributes[:from_transitions_attributes] = attributes.delete(:from_transitions) || []
     end
   end
 end
