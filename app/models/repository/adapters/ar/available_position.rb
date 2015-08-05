@@ -2,24 +2,34 @@ module Repository::Adapters::AR
   class AvailablePosition
     def initialize(listener)
       @listener = listener
-      @data     = Repository::Adapters::AR::Data::AvailablePosition
+      @data     = Repository::Adapters::AR::Data::Position
     end
 
     def find(id)
       @listener.available_position_adapter_find_success(
-        ::Position.new(@data.find(id).attributes))
+        make_model(@data.find(id)))
     end
 
     def create(attributes)
       @listener.available_position_adapter_create_success(
-        ::Position.new(@data.create(attributes).attributes))
+        make_model(@data.create(attributes))
     end
 
     def all(position)
       @listener.available_position_adapter_all_success(
-        @data.excluding_positions([position] + position.to_positions).map {|available_position| ::Position.new(available_position.attributes)},
-        @data.excluding_positions([position] + position.from_positions).map {|available_position| ::Position.new(available_position.attributes)}
+        make_models(@data.excluding_to_positions(position)),
+        make_models(@data.excluding_from_positions(position))
       )
+    end
+
+    private
+
+    def make_models(ar_positions)
+      ar_positions.map {|position| make_model(position)}
+    end
+
+    def make_model(position)
+      ::Position.new(position.attributes)
     end
   end
 end

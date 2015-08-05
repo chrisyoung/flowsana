@@ -1,39 +1,48 @@
 module Repository::Adapters::AR
   class Position
     def initialize(listener)
-      @listener = listener
-      @position_data           = Repository::Adapters::AR::Data::Position
+      @listener      = listener
+      @position_data = Repository::Adapters::AR::Data::Position
+      @model         = ::Position
     end
 
     def find(id)
       result = @position_data.find(id)
-      @listener.position_adapter_find_success(
-        ::Position.new(result.attributes).tap do |position|
-          position.to_transitions = result.to_transitions
+      @listener.send :position_adapter_find_success,
+        make_model(result).tap do |position|
+          position.to_transitions   = result.to_transitions
           position.from_transitions = result.from_transitions
         end
-      )
     end
 
     def create(attributes)
-      @listener.position_adapter_create_success(
-        ::Position.new(@position_data.create(attributes).attributes))
+      @listener.send :position_adapter_create_success,
+        make_model(@position_data.create(attributes))
     end
 
     def update(position, attributes)
-      to_transitions = attributes.delete(:to_transitions)
-      attributes[:to_transitions_attributes] = to_transitions
+      normalize_attributes(attributes)
 
-      ar_position = @position_data.find(position.id)
-      ar_position.update_attributes(attributes)
+      @position_data.find(position.id).tap do |ar_position|
+        ar_position.update_attributes(attributes)
 
-      @listener.send(:position_adapter_update_success,
-        ::Position.new(ar_position.attributes))
+        @listener.send :position_adapter_update_success, make_model(ar_position)
+      end
     end
 
     def all
-      @listener.position_adapter_all_success(
-        @position_data.all.map {|position| ::Position.new(position.attributes)})
+      @listener.send :position_adapter_all_success,
+        @position_data.all.map {|position| make_model(position)}
+    end
+
+    private
+
+    def make_model(ar_position)
+      @model.new(ar_position.attributes)
+    end
+
+    def normalize_attributes(attributes)
+      attributes[:to_transitions_attributes] = attributes.delete!(:to_transitions)
     end
   end
 end
