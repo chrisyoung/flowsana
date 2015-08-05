@@ -26,7 +26,7 @@ private
   listen_for(:get_positions_success)   { |p| @positions = p }
   listen_for(:update_position_success) { |p| redirect_to positions_path }
   listen_for(:create_position_success) { |p| redirect_to positions_path }
-  listen_for(:get_available_positions) do |to_positions, from_positions|
+  listen_for(:get_available_positions_success) do |to_positions, from_positions|
     @to_positions   = to_positions
     @from_positions = from_positions
   end
