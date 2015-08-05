@@ -1,40 +1,41 @@
 class PositionsController < ApplicationController
   before_filter :get_new_position, only: :new
-  before_filter -> { @use_cases = Rhag.new(self) }
+  before_filter -> { @use_case = Rhag::UseCase.new(self) }
 
   def index
-    @use_cases[:get_positions].all
+    @use_case[:get_positions].all
   end
 
   def create
-    @use_cases[:create_position].create position_params
+    @use_case[:create_position].create position_params
   end
 
   def edit
-    @use_cases[:get_position].get params[:id]
-    @use_cases[:get_positions].all
+    @use_case[:get_position].get params[:id]
+    @use_case[:get_available_positions].get @position
   end
 
   def update
-    @use_cases[:get_position].get params[:id]
-    @use_cases[:update_position].update @position, position_params
-    @use_cases[:create_to_transitions, repo: 'transition'].create @position, position_params[:to_transitions]
+    @use_case[:get_position].get params[:id]
+    @use_case[:update_position].update @position, position_params
   end
 
 private
 
-  listen_for(:get_position_success)          { |p| @position    = p }
-  listen_for(:get_positions_success)         { |p| @positions   = p }
-  listen_for(:list_transitions_for_success)  { |t| @transitions = t }
-  listen_for(:update_position_success)       { |p| redirect_to positions_path }
-  listen_for(:create_position_success)       { |p| redirect_to positions_path }
-  listen_for(:create_to_transitions_success) { |t| @transitions = t}
+  listen_for(:get_position_success)    { |p| @position  = p }
+  listen_for(:get_positions_success)   { |p| @positions = p }
+  listen_for(:update_position_success) { |p| redirect_to positions_path }
+  listen_for(:create_position_success) { |p| redirect_to positions_path }
+  listen_for(:get_available_positions) do |to_positions, from_positions|
+    @to_positions   = to_positions
+    @from_positions = from_positions
+  end
 
   def get_new_position
     @position = Position.new
   end
 
   def position_params
-    params.require(:position).permit :name, :to_transitions => [:to]
+    params.require(:position).permit :name, :to_transitions => [:to_id, :from_id]
   end
 end

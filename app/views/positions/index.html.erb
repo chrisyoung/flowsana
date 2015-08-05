@@ -1,6 +1,9 @@
-<h1>Positions</h1>
-<ul>
-  <% @positions.each do |position| %>
-    <li><%= link_to(position.name, edit_position_path(position.id)) %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <h1>Positions</h1>
+  <%= link_to("Create a New Position", new_position_path) %>
+  <ul>
+    <% @positions.each do |position| %>
+      <li><%= link_to(position.name, edit_position_path(position.id)) %></li>
+    <% end %>
+  </ul>
+</div>

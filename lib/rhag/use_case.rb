@@ -1,11 +1,11 @@
-class Rhag
+class Rhag::UseCase
   def initialize(listener)
     @listener = listener
   end
 
   def [](name, options={})
     repository_name = options[:repo] || use_case_name(name)
-    UseCase.const_get(name.to_s.camelize).new @listener, Repository::Database.const_get(repository_name.classify)
+    ::UseCase.const_get(name.to_s.camelize).new @listener, Repository::Database.const_get(repository_name.classify)
   end
 
   def use_case_name(name)
