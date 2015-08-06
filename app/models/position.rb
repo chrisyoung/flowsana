@@ -19,4 +19,9 @@ class Position
   def to_positions
     to_transitions.map { |transition| transition.to }
   end
+
+  def from_positions
+    from_transitions.map { |transition| transition.from }
+  end
+
 end

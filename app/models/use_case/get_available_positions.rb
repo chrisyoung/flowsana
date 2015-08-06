@@ -8,11 +8,11 @@ module UseCase
     end
 
     def get(position)
-      @repository.all(position)
+      @repository.all position
     end
 
     def available_position_repository_all_success(to_positions, from_positions)
-      @listener.get_available_positions_success(to_positions, from_positions)
+      @listener.get_available_positions_success to_positions, from_positions
     end
 
     def available_position_repository_get_failure

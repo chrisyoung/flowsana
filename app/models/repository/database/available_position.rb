@@ -18,11 +18,11 @@ module Repository
       end
 
       def all(position)
-       @adapter.all(position)
+        @adapter.all(position)
       end
 
       def available_position_adapter_all_success(to_positions, from_positions)
-         @listener.available_position_repository_all_success(to_positions, from_positions)
+        @listener.available_position_repository_all_success(to_positions, from_positions)
       end
 
       def count

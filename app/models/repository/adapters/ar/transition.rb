@@ -17,7 +17,6 @@ module Repository::Adapters::AR
     end
 
     def create(attributes)
-      binding.pry
       data_model = @data.create(attributes)
 
       @listener.transition_adapter_create_success(
