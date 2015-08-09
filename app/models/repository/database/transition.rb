@@ -34,7 +34,7 @@ module Repository
       end
 
       def transition_adapter_get_success(transition)
-        @listener.transition_repository_get_success(::Transition.new(transition.attributes))
+        @listener.transition_repository_get_success(transition)
       end
     end
   end

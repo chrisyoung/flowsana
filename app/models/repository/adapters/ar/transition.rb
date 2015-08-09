@@ -17,7 +17,11 @@ module Repository::Adapters::AR
     end
 
     def get(id)
-      @listener.transition_adapter_get_success(@data.find(id))
+      ar_transition = @data.includes(:to, :from).find(id)
+      transition = ::Transition.new(ar_transition.attributes)
+      transition.to   = ar_transition.to
+      transition.from = ar_transition.from
+      @listener.transition_adapter_get_success(transition)
     end
 
     def create(attributes)
