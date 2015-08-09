@@ -16,7 +16,6 @@ module Repository
             @listener.flow_repository_create_success(flow)
           end
         end
-
       end
 
       def all
@@ -32,7 +31,7 @@ module Repository
       end
 
       def find(id: id)
-        ::Flow.new(@adapter.find(id).attributes)
+        ::Flow.new @adapter.find(id).attributes
       end
     end
   end

@@ -16,6 +16,10 @@ module Repository::Adapters::AR
       )
     end
 
+    def get(id)
+      @listener.transition_adapter_get_success(@data.find(id))
+    end
+
     def create(attributes)
       data_model = @data.create(attributes)
 

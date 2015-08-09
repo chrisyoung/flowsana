@@ -11,7 +11,7 @@
       <h2>Flows to</h2>
       <ul>
         <% @position.to_transitions.each do |t| %>
-          <li><%=t.to.name%></li>
+          <li><%= link_to(t.to.name, edit_transition_path)%></li>
         <% end %>
       </ul>
 

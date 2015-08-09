@@ -3,27 +3,37 @@ module Repository
     class Transition
       attr_accessor :listener
 
-      def list
-        @list ||= []
+      def initialize
+        @list = []
+      end
+
+      def find(transition)
+        @list.first do |listed_transition|
+          transition == listed_transition
+        end
+      end
+
+      def all
+        @listener.transition_repository_all_success(@list)
       end
 
       def create(attributes)
         ::Transition.new(attributes).tap do |transition|
-          return unless transition.valid?
-          list << transition
+          if transition.valid?
+            @list << transition
+            @listener.transition_repository_create_success(transition) if @listener
+          else
+            @listener.transition_repository_create_failure if @listener
+          end
         end
       end
 
-      def first
-        list.first
-      end
-
-      def clear
-        @list = []
-      end
-
       def count
-        list.count
+        @list.count
+      end
+
+      def first
+        @list.first
       end
     end
   end

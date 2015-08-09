@@ -57,5 +57,6 @@ Rails.application.routes.draw do
   root 'welcome#show'
   resources :flows
   resources :positions
+  resources :transitions
 
 end

@@ -1,26 +1,24 @@
 module Repository
   module Database
     class Transition
-      def initialize(listener)
-        @adapter  = Repository::Adapters::AR::Transition.new self
-        @model    = ::Transition
+      def initialize(listener = nil)
         @listener = listener
+        @adapter  = Repository::Adapters::AR::Transition.new(self)
+        @model    = ::Transition
       end
 
       def create(attributes)
-        @adapter.create attributes
+        @model.new(attributes).tap do |transition|
+          return unless transition.valid?
+          @adapter.create!(transition.attributes).tap do |transition_data|
+            transition.id = transition_data.id
+            @listener.transition_repository_create_success(transition)
+          end
+        end
       end
 
-      def list(position)
-        @adapter.list position
-      end
-
-      def transition_adapter_create_success(transition)
-        @listener.transition_repository_create_success(transition)
-      end
-
-      def transition_adapter_list_success(transitions)
-        @listener.transition_repository_list_success(transitions)
+      def all
+        @listener.transition_repository_all_success(@adapter.all)
       end
 
       def count
@@ -31,8 +29,12 @@ module Repository
         @adapter.first
       end
 
-      def find(id: id)
-        ::Transition.new(@adapter.find(id).attributes)
+      def get(id)
+        @adapter.get(id)
+      end
+
+      def transition_adapter_get_success(transition)
+        @listener.transition_repository_get_success(::Transition.new(transition.attributes))
       end
     end
   end
