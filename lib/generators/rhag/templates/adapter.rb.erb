@@ -5,9 +5,9 @@ module Repository::Adapters::AR
       @data     = Repository::Adapters::AR::Data::<%= repository_name.camelize %>
     end
 
-    def find(id)
-      @listener.<%= repository_name %>_adapter_find_success(
-        ::<%= repository_name.camelize %>.new(@data.find(id).attributes))
+    def get id
+      @listener.<%= repository_name %>_adapter_get_success(
+        ::<%= repository_name.camelize %>.new(@data.find(id)))
     end
 
     def create(attributes)

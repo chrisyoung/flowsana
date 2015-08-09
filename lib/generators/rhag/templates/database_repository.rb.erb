@@ -29,8 +29,12 @@ module Repository
         @adapter.first
       end
 
-      def find(id: id)
-        ::<%= repository_name.camelize %>.new(@adapter.find(id).attributes)
+      def get(id)
+        @adapter.get(id)
+      end
+
+      def <%= repository_name %>_adapter_get_success(<%= repository_name %>)
+        @listener.<%= repository_name %>_repository_get_success(::<%= repository_name.camelize %>.new(<%= repository_name %>.attributes))
       end
     end
   end

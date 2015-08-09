@@ -7,8 +7,8 @@ module UseCase
       @repository = (repository || Repository::Memory::<%= repository_name.camelize %>).new(self)
     end
 
-    def <%= file_name.split('_').first %>
-      @repository.<%= repository_action %>
+    def <%= file_name.split('_').first %>(id) # or (attributes)?
+      @repository.<%= repository_action %>(id) # or (attributes)?
     end
 
     def <%= repository_name %>_repository_<%= repository_action %>_success(<%= repository_name %>)
