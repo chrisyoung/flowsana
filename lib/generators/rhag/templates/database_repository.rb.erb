@@ -25,6 +25,14 @@ module Repository
         @model.count
       end
 
+      def update(id, attributes)
+        @adapter.update(id, attributes)
+      end
+
+      def <%= repository_name %>_adapter_update_success(<%= repository_name %>)
+        @listener.<%= repository_name %>_repository_update_success(<%= repository_name %>)
+      end
+
       def first
         @adapter.first
       end
@@ -34,7 +42,7 @@ module Repository
       end
 
       def <%= repository_name %>_adapter_get_success(<%= repository_name %>)
-        @listener.<%= repository_name %>_repository_get_success(::<%= repository_name.camelize %>.new(<%= repository_name %>.attributes))
+        @listener.<%= repository_name %>_repository_get_success(<%= repository_name %>))
       end
     end
   end
