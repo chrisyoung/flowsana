@@ -6,4 +6,8 @@ class Transition
     @attributes = attributes
     super(attributes)
   end
+
+  def persisted?
+    id.present?
+  end
 end

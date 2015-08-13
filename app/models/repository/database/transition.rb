@@ -25,6 +25,14 @@ module Repository
         @model.count
       end
 
+      def update(id, attributes)
+        @adapter.update(id, attributes)
+      end
+
+      def transition_adapter_update_success(transition)
+        @listener.transition_repository_update_success(transition)
+      end
+
       def first
         @adapter.first
       end

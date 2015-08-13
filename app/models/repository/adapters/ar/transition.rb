@@ -5,31 +5,36 @@ module Repository::Adapters::AR
       @data     = Repository::Adapters::AR::Data::Transition
     end
 
-    def list(position)
-      @listener.transition_adapter_list_success(
-        @data.where(from_id: position.id).map do |transition|
-          ::Transition.new(
-            transition.attributes.merge(
-              to:   transition.to,
-              from: transition.from))
-        end
-      )
-    end
-
-    def get(id)
-      ar_transition = @data.includes(:to, :from).find(id)
-      transition = ::Transition.new(ar_transition.attributes)
-      transition.to   = ar_transition.to
-      transition.from = ar_transition.from
-      @listener.transition_adapter_get_success(transition)
+    def get id
+      record = @data.find(id)
+      t = ::Transition.new(record.attributes)
+      t.to = ::Position.new(record.to.attributes)
+      t.from = ::Position.new(record.from.attributes)
+      @listener.transition_adapter_get_success(t)
     end
 
     def create(attributes)
-      data_model = @data.create(attributes)
-
       @listener.transition_adapter_create_success(
-        ::Transition.new(data_model.attributes))
+        ::Transition.new(@data.create(attributes).attributes))
     end
 
+    def update(id, attributes)
+      record = @data.find(id)
+      record.update_attributes(attributes)
+
+      @listener.transition_adapter_update_success(
+        ::Transition.new(record.attributes)
+      )
+    end
+
+    def list
+      # @listener.adapter_create_success(
+      #   ::Transition_adapter_create_success(@data.all))
+    end
+
+    def all
+      @listener.transition_adapter_all_success(
+        @data.all.map {|transition| ::Transition.new(transition.attributes)})
+    end
   end
 end

@@ -1,3 +1,11 @@
 <div class="container" >
-  <h1><%= @transition.from.name %> </h1>
+  <h3>Flow From
+    <%= link_to @transition.from.name, edit_position_path(@transition.from) %> to
+    <%= link_to @transition.to.name, edit_position_path(@transition.to) %></h3>
+
+  <h4>Description<h4>
+    <%= form_for @transition do |f| %>
+      <%= f.text_area :description %>
+      <%= f.submit %>
+    <% end %>
 </div>
