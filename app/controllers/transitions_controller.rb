@@ -1,12 +1,12 @@
 class TransitionsController < ApplicationController
-  before_filter -> { @use_case = Rhag::UseCase.new(self) }
+  before_filter -> { @domain_driver = DomainDriven::Driver.new(self) }
 
   def edit
-    @use_case[:get_transition].get params[:id]
+    @domain_driver[:get_transition].get params[:id]
   end
 
   def update
-    @use_case[:update_transition].update params[:id], transition_attributes
+    @domain_driver[:update_transition].update params[:id], transition_attributes
   end
 
   private

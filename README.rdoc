@@ -22,6 +22,7 @@ Benefits
   * Generators
 
 TODO
+  * Create a video demo
   * Generate route, controller, and migration
   * Rename RHAG to Domain Driven
   * Move Domain Driven to its own repo

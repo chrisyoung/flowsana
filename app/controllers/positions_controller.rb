@@ -1,23 +1,23 @@
 class PositionsController < ApplicationController
   before_filter :get_new_position, only: :new
-  before_filter -> { @use_case = Rhag::UseCase.new(self) }
+  before_filter -> { @domain_driver = DomainDriven::Driver.new(self) }
 
   def index
-    @use_case[:get_positions].all
+    @domain_driver[:get_positions].all
   end
 
   def create
-    @use_case[:create_position].create position_params
+    @domain_driver[:create_position].create position_params
   end
 
   def edit
-    @use_case[:get_position].get params[:id]
-    @use_case[:get_available_positions].get @position
+    @domain_driver[:get_position].get params[:id]
+    @domain_driver[:get_available_positions].get @position
   end
 
   def update
-    @use_case[:get_position].get params[:id]
-    @use_case[:update_position].update @position, position_params
+    @domain_driver[:get_position].get params[:id]
+    @domain_driver[:update_position].update @position, position_params
   end
 
 private

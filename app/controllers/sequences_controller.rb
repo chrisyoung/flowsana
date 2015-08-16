@@ -1,21 +1,21 @@
 class SequencesController < ApplicationController
-  before_filter -> { @use_case = Rhag::UseCase.new(self) }
+  before_filter -> { @domain_driver = DomainDriven::Driver.new(self) }
   before_filter :get_sequence, only: :new
 
   def index
-    @use_case[:list_sequences].list
+    @domain_driver[:list_sequences].list
   end
 
   def create
-    @use_case[:create_sequence].create sequence_params
+    @domain_driver[:create_sequence].create sequence_params
   end
 
   def edit
-    @use_case[:read_sequence].read(params[:id])
+    @domain_driver[:read_sequence].read(params[:id])
   end
 
   def update
-    @use_case[:update_sequence].update(params[:id], sequence_params)
+    @domain_driver[:update_sequence].update(params[:id], sequence_params)
   end
 
   private

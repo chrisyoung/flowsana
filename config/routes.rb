@@ -59,5 +59,5 @@ Rails.application.routes.draw do
   resources :positions
   resources :transitions
   resources :sequences
-
+  resources :cats
 end

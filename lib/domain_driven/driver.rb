@@ -1,4 +1,4 @@
-class Rhag::UseCase
+class DomainDriven::Driver
   def initialize(listener)
     @listener = listener
   end

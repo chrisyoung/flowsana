@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150816030825) do
+ActiveRecord::Schema.define(version: 20150816181837) do
+
+  create_table "cats", force: :cascade do |t|
+    t.string "name"
+    t.string "fur"
+  end
 
   create_table "flows", force: :cascade do |t|
     t.string "name"
