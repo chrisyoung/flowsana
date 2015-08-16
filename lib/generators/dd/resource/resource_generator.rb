@@ -9,7 +9,7 @@ module Dd
       generate "dd:use_case", "read_#{file_name}", 'read id'
       generate "dd:use_case", "update_#{file_name}", 'update id attributes'
       generate "dd:use_case", "delete_#{file_name}", 'delete id'
-      generate "dd:model", file_name, fields
+      generate "dd:model", file_name, fields.join(" ")
       generate "migration", "create_#{file_name}", fields.join(" ")
     end
   end
