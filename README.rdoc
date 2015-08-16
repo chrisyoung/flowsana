@@ -20,6 +20,7 @@ Benefits
   * listener helper for controllers
   * DomainDriven::UseCase makes it easy to call use cases
   * Generators
+  * In-memory database
 
 TODO
   * Create a video demo
