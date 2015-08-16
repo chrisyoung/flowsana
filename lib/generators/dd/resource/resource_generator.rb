@@ -10,6 +10,8 @@ module Dd
       generate "dd:use_case", "update_#{file_name}", 'update id attributes'
       generate "dd:use_case", "delete_#{file_name}", 'delete id'
       generate "dd:model", file_name, fields
+      binding.pry
+      generate "migration", "create_#{file_name}", fields
     end
   end
 end
