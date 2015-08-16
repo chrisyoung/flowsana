@@ -7,8 +7,8 @@ module Dd
 
 
     def copy_use_case_file
-      template "use_case.rb.erb", "app/models/use_case/#{file_name}.rb"
-      template "use_case_spec.rb.erb", "spec/models/use_case/#{file_name}_spec.rb"
+      template "use_case.rb.erb", "app/models/use_case/#{repository_action}.rb"
+      template "use_case_spec.rb.erb", "spec/models/use_case/#{repository_action}_spec.rb"
     end
   end
 end
