@@ -1,25 +1,25 @@
 module Repository
   module Database
-    class <%= repository_name.camelize %>
+    class <%= file_name.camelize %>
       def initialize(listener = nil)
         @listener = listener
-        @adapter  = Repository::Adapters::AR::<%= repository_name.camelize %>.new(self)
-        @model    = ::<%= repository_name.camelize %>
+        @adapter  = Repository::Adapters::AR::<%= file_name.camelize %>.new(self)
+        @model    = ::<%= file_name.camelize %>
       end
 
       def create(attributes)
-        @model.new(attributes).tap do |<%= repository_name %>|
-          return unless <%= repository_name %>.valid?
-          @adapter.create(<%= repository_name %>.attributes)
+        @model.new(attributes).tap do |<%= file_name %>|
+          return unless <%= file_name %>.valid?
+          @adapter.create(<%= file_name %>.attributes)
         end
       end
 
       def sequence_adapter_create_success(sequence)
-        @listener.<%= repository_name %>_repository_create_success(sequence)
+        @listener.<%= file_name %>_repository_create_success(sequence)
       end
 
       def list
-        @listener.<%= repository_name %>_repository_list_success(@adapter.list)
+        @listener.<%= file_name %>_repository_list_success(@adapter.list)
       end
 
       def count
@@ -30,24 +30,24 @@ module Repository
         @adapter.update(id, attributes)
       end
 
-      def <%= repository_name %>_adapter_update_success(<%= repository_name %>)
-        @listener.<%= repository_name %>_repository_update_success(<%= repository_name %>)
+      def <%= file_name %>_adapter_update_success(<%= file_name %>)
+        @listener.<%= file_name %>_repository_update_success(<%= file_name %>)
       end
 
       def first
         @adapter.first
       end
 
-      def <%= repository_name %>_adapter_list_success(sequences)
-        @listener.<%= repository_name %>_repository_list_success(sequences)
+      def <%= file_name %>_adapter_list_success(sequences)
+        @listener.<%= file_name %>_repository_list_success(sequences)
       end
 
       def read(id)
         @adapter.read(id)
       end
 
-      def <%= repository_name %>_adapter_read_success(<%= repository_name %>)
-        @listener.<%= repository_name %>_repository_read_success(<%= repository_name %>)
+      def <%= file_name %>_adapter_read_success(<%= file_name %>)
+        @listener.<%= file_name %>_repository_read_success(<%= file_name %>)
       end
     end
   end
