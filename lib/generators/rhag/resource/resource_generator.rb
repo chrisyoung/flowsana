@@ -9,7 +9,6 @@ module Rhag
       generate "rhag:use_case", "update_#{file_name}", 'update'
       generate "rhag:use_case", "delete_#{file_name}", 'delete'
       generate "rhag:model", file_name
-
     end
   end
 end

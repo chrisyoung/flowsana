@@ -18,23 +18,25 @@ Benefits
   * Portable
   * Works with Rails
   * listener helper for controllers
-  * HOROR::UseCase makes it easy to call use cases
+  * DomainDriven::UseCase makes it easy to call use cases
   * Generators
 
 TODO
-  * Rename RHAG to HOROR
-  * Move HOROR code into its own repo
-  * Consider horor gem and horor_rails gem
+  * Rename RHAG to Domain Driven
+  * Move Domain Driven to its own repo
   * Move Repository::Adapters to Repository::Database::Adapters
   * Support parameters on generator
   * Don't mix active_model into models
   * Wrap models in active_model in the rails service
   * Generator to build hexagon in lib
-  * Build rails gem for horor::generators and horor::rails_helpers
+  * Build rails gem for
+      domain_dviven
+      domain_driven::generators
+      domain_driven::rails
 
 Consider:
 
-  class HOROR::RailsHelpers::WrapActiveModel
+  class DomainDriven::RailsHelpers::WrapActiveModel
     # Listener
 
     def wrap(model)
