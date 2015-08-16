@@ -1,29 +1,29 @@
 module Repository
   module Memory
-    class <%= repository_name.camelize %>
+    class <%= file_name.camelize %>
       attr_accessor :listener
 
       def initialize
         @list = []
       end
 
-      def find(<%= repository_name %>)
-        @list.first do |listed_<%= repository_name %>|
-          <%= repository_name %> == listed_<%= repository_name %>
+      def find(<%= file_name %>)
+        @list.first do |listed_<%= file_name %>|
+          <%= file_name %> == listed_<%= file_name %>
         end
       end
 
       def all
-        @listener.<%= repository_name %>_repository_all_success(@list)
+        @listener.<%= file_name %>_repository_all_success(@list)
       end
 
       def create(attributes)
-        ::<%= repository_name.camelize %>.new(attributes).tap do |<%= repository_name %>|
-          if <%= repository_name %>.valid?
-            @list << <%= repository_name %>
-            @listener.<%= repository_name %>_repository_create_success(<%= repository_name %>) if @listener
+        ::<%= file_name.camelize %>.new(attributes).tap do |<%= file_name %>|
+          if <%= file_name %>.valid?
+            @list << <%= file_name %>
+            @listener.<%= file_name %>_repository_create_success(<%= file_name %>) if @listener
           else
-            @listener.<%= repository_name %>_repository_create_failure if @listener
+            @listener.<%= file_name %>_repository_create_failure if @listener
           end
         end
       end
