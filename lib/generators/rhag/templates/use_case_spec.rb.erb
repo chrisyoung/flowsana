@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe UseCase::<%= file_name.camelize %> do
   describe '<%= file_name.split("_").first %>' do
-    subject           { described_class.new(listener, Repository::Memory::<%= repository_name.titleize %>.new) }
+    subject           { described_class.new(listener, Repository::Memory::<%= file_name.titleize %>.new) }
     let (:listener)   { double("<%= file_name %> listener", <%= file_name %>_success: nil, <%= file_name %>_failure: nil) }
     let (:repository) { subject.repository }
 

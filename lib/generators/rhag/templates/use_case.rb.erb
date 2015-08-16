@@ -4,18 +4,18 @@ module UseCase
 
     def initialize(listener, repository=nil)
       @listener   = listener
-      @repository = (repository || Repository::Memory::<%= repository_name.camelize %>).new(self)
+      @repository = (repository || Repository::Memory::<%= file_name.camelize %>).new(self)
     end
 
     def <%= file_name.split('_').first %>
       @repository.<%= repository_action %>
     end
 
-    def <%= repository_name %>_repository_<%= repository_action %>_success(<%= repository_name %>)
-      @listener.<%= file_name %>_success(<%= repository_name %>)
+    def <%= file_name %>_repository_<%= repository_action %>_success(<%= file_name %>)
+      @listener.<%= file_name %>_success(<%= file_name %>)
     end
 
-    def <%= repository_name %>_repository_<%= repository_action %>_failure
+    def <%= file_name %>_repository_<%= repository_action %>_failure
       @listener.<%= file_name %>_failure
     end
   end
