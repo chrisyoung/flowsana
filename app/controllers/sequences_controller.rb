@@ -12,7 +12,7 @@ class SequencesController < ApplicationController
 
   private
 
-  listen_for(:list_sequences_success) { |repositories| @repositories = repositories }
+  listen_for(:list_sequences_success) { |sequences| @sequences = sequences }
   listen_for(:create_sequence_success) { |repository| redirect_to sequences_path }
 
   def get_sequence
