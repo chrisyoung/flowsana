@@ -1,4 +1,4 @@
-module Rhag
+module Dd
   class ActiveRecordModelGenerator < Rails::Generators::NamedBase
     source_root File.expand_path('../../templates', __FILE__)
 

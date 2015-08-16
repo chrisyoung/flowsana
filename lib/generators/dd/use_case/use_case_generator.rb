@@ -1,4 +1,4 @@
-module Rhag
+module Dd
   class UseCaseGenerator < Rails::Generators::Base
     source_root File.expand_path('../../templates', __FILE__)
     argument :repository_action, :type => :string
