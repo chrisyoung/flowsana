@@ -10,11 +10,12 @@ module Repository
       def create(attributes)
         @model.new(attributes).tap do |sequence|
           return unless sequence.valid?
-          @adapter.create!(sequence.attributes).tap do |sequence_data|
-            sequence.id = sequence_data.id
-            @listener.sequence_repository_create_success(sequence)
-          end
+          @adapter.create(sequence.attributes)
         end
+      end
+
+      def sequence_adapter_create_success(sequence)
+        @listener.sequence_repository_create_success(sequence)
       end
 
       def list

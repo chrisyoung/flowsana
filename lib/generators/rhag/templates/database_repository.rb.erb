@@ -10,11 +10,12 @@ module Repository
       def create(attributes)
         @model.new(attributes).tap do |<%= repository_name %>|
           return unless <%= repository_name %>.valid?
-          @adapter.create!(<%= repository_name %>.attributes).tap do |<%= repository_name %>_data|
-            <%= repository_name %>.id = <%= repository_name %>_data.id
-            @listener.<%= repository_name %>_repository_create_success(<%= repository_name %>)
-          end
+          @adapter.create(<%= repository_name %>.attributes)
         end
+      end
+
+      def sequence_adapter_create_success(sequence)
+        @listener.<%= repository_name %>_repository_create_success(sequence)
       end
 
       def list

@@ -1,6 +1,6 @@
 class Sequence
   include ActiveModel::Model
-  attr_accessor :attributes, :id
+  attr_accessor :attributes, :id, :name
 
   def initialize(attributes={})
     @attributes = attributes
