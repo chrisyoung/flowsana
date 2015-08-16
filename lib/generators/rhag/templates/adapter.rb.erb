@@ -25,8 +25,7 @@ module Repository::Adapters::AR
     end
 
     def list
-      @listener.<% repository_name %>_adapter_create_success(
-        ::<%= repository_name.camelize %>_adapter_create_success(@data.all))
+      @listener.<%= repository_name %>_adapter_list_success(@data.all)
     end
 
     def all

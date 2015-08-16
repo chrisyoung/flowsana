@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723172113) do
+ActiveRecord::Schema.define(version: 20150816030825) do
 
   create_table "flows", force: :cascade do |t|
     t.string "name"
   end
 
   create_table "positions", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "sequences", force: :cascade do |t|
     t.string "name"
   end
 

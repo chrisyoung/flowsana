@@ -17,8 +17,8 @@ module Repository
         end
       end
 
-      def all
-        @listener.<%= repository_name %>_repository_all_success(@adapter.all)
+      def list
+        @listener.<%= repository_name %>_repository_list_success(@adapter.list)
       end
 
       def count
@@ -37,12 +37,16 @@ module Repository
         @adapter.first
       end
 
+      def <%= repository_name %>_adapter_list_success(sequences)
+        @listener.<%= repository_name %>_repository_list_success(sequences)
+      end
+
       def get(id)
         @adapter.get(id)
       end
 
       def <%= repository_name %>_adapter_get_success(<%= repository_name %>)
-        @listener.<%= repository_name %>_repository_get_success(<%= repository_name %>))
+        @listener.<%= repository_name %>_repository_get_success(<%= repository_name %>)
       end
     end
   end
