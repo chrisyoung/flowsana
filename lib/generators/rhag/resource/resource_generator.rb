@@ -9,7 +9,7 @@ module Rhag
       generate "rhag:use_case", "read_#{file_name}", 'read id'
       generate "rhag:use_case", "update_#{file_name}", 'update id attributes'
       generate "rhag:use_case", "delete_#{file_name}", 'delete id'
-      generate "rhag:model", file_name
+      generate "rhag:model", file_name, fields
     end
   end
 end
