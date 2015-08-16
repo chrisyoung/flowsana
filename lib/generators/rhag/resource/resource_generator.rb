@@ -1,6 +1,7 @@
 module Rhag
   class ResourceGenerator < Rails::Generators::NamedBase
     source_root File.expand_path('../../templates', __FILE__)
+    argument :fields, :type => :array
 
     def make_files
       generate "rhag:use_case", "list_#{file_name.pluralize}", 'list'

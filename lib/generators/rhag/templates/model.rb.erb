@@ -1,6 +1,6 @@
 class <%= file_name.camelize %>
   include ActiveModel::Model
-  attr_accessor :attributes, :id
+  attr_accessor :attributes, :id, <%= Hash[*fields.flat_map{|field| field.split(":")}].keys.map{|key| ":#{key}"}.join(", ") %>
 
   def initialize(attributes={})
     @attributes = attributes
