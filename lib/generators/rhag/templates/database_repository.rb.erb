@@ -42,12 +42,12 @@ module Repository
         @listener.<%= repository_name %>_repository_list_success(sequences)
       end
 
-      def get(id)
-        @adapter.get(id)
+      def read(id)
+        @adapter.read(id)
       end
 
-      def <%= repository_name %>_adapter_get_success(<%= repository_name %>)
-        @listener.<%= repository_name %>_repository_get_success(<%= repository_name %>)
+      def <%= repository_name %>_adapter_read_success(<%= repository_name %>)
+        @listener.<%= repository_name %>_repository_read_success(<%= repository_name %>)
       end
     end
   end

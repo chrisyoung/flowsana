@@ -1,0 +1,7 @@
+<div class="container">
+  <%= form_for @sequence do |f| %>
+    <%= f.label "Name", for: :name %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+  <% end %>
+</div>

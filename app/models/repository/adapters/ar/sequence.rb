@@ -5,8 +5,8 @@ module Repository::Adapters::AR
       @data     = Repository::Adapters::AR::Data::Sequence
     end
 
-    def get id
-      @listener.sequence_adapter_get_success(
+    def read id
+      @listener.sequence_adapter_read_success(
         ::Sequence.new(@data.find(id).attributes))
     end
 

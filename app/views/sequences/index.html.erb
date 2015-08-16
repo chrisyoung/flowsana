@@ -1,7 +1,7 @@
 <ul>
   <div class="container">
     <% @sequences.each do |sequence| %>
-      <li><%= sequence.name %></li>
+      <li><%= link_to(sequence.name, edit_sequence_path(sequence)) %></li>
     <% end %>
   </div>
 </ul>

@@ -42,12 +42,12 @@ module Repository
         @listener.sequence_repository_list_success(sequences)
       end
 
-      def get(id)
-        @adapter.get(id)
+      def read(id)
+        @adapter.read(id)
       end
 
-      def sequence_adapter_get_success(sequence)
-        @listener.sequence_repository_get_success(sequence)
+      def sequence_adapter_read_success(sequence)
+        @listener.sequence_repository_read_success(sequence)
       end
     end
   end
