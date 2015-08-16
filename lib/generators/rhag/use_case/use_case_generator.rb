@@ -1,8 +1,9 @@
 module Rhag
-  class UseCaseGenerator < Rails::Generators::NamedBase
+  class UseCaseGenerator < Rails::Generators::Base
     source_root File.expand_path('../../templates', __FILE__)
     argument :repository_action, :type => :string
-    argument :parameters, :type => :array
+    argument :file_name, :type => :string
+    argument :parameters, :type => :array, :default => []
 
 
     def copy_use_case_file
