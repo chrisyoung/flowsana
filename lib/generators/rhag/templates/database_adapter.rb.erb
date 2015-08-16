@@ -1,0 +1,36 @@
+module Repository::Adapters::AR
+  class <%= file_name.camelize %>
+    def initialize(listener)
+      @listener = listener
+      @data     = Repository::Adapters::AR::Data::<%= file_name.camelize %>
+    end
+
+    def read id
+      @listener.<%= file_name %>_adapter_read_success(
+        ::<%= file_name.camelize %>.new(@data.find(id).attributes))
+    end
+
+    def create(attributes)
+      @listener.<%= file_name %>_adapter_create_success(
+        ::<%= file_name.camelize %>.new(@data.create(attributes).attributes))
+    end
+
+    def update(id, attributes)
+      record = @data.find(id)
+      record.update_attributes(attributes)
+
+      @listener.<%= file_name %>_adapter_update_success(
+        ::<%= file_name.camelize %>.new(record.attributes)
+      )
+    end
+
+    def list
+      @listener.<%= file_name %>_adapter_list_success(@data.all)
+    end
+
+    def all
+      @listener.<%= file_name %>_adapter_all_success(
+        @data.all.map {|<%= file_name %>| ::<%= file_name.camelize %>.new(<%= file_name %>.attributes)})
+    end
+  end
+end
