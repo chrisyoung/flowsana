@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe <%= repository_name.camelize %> do
+describe <%= file_name.camelize %> do
   let(:attributes) {{}}
-  subject { <%= repository_name.camelize %>.new(attributes) }
+  subject { <%= file_name.camelize %>.new(attributes) }
 end
