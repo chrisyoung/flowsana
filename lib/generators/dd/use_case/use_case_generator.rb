@@ -2,6 +2,7 @@ module Dd
   class UseCaseGenerator < Rails::Generators::Base
     source_root File.expand_path('../../templates', __FILE__)
     argument :file_name, :type => :string
+    argument :repository_name, :type => :string
     argument :repository_action, :type => :string
     argument :parameters, :type => :array, :default => []
 

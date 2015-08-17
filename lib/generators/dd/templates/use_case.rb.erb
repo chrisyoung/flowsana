@@ -1,6 +1,6 @@
 module UseCase
   class <%= file_name.camelize %>
-    attr_accessor :repository
+    attr_accessor :repository_name
 
     def initialize(listener, repository=nil)
       @listener   = listener
@@ -11,11 +11,11 @@ module UseCase
       @repository.<%= repository_action %> <%= parameters.join(", ") %>
     end
 
-    def <%= file_name %>_repository_<%= repository_action %>_success(<%= file_name %>)
+    def <%= repository_name %>_repository_<%= repository_action %>_success(<%= file_name %>)
       @listener.<%= file_name %>_success(<%= file_name %>)
     end
 
-    def <%= file_name %>_repository_<%= repository_action %>_failure
+    def <%= repository_name %>_repository_<%= repository_action %>_failure
       @listener.<%= file_name %>_failure
     end
   end
