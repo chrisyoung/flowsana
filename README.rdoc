@@ -42,7 +42,8 @@ Domain Driven Overview
   What it is, what it does
 
 Resource
-  Everything you need to drive by domain in Rails.  Generates a use case, domain_model, database_adapter, and repositories
+  Everything you need to drive by domain in Rails.  Generates a use case,
+  domain_model, database_adapter, migrationand repositories
   > rails g dd:resource user name:string email:test@domain_driven.com
 
 Use Case
@@ -82,6 +83,7 @@ Todo
     * Create a video demo
   * Generators:
     * Generate route, controller
+    * Model and resource should both generate a migration
   * Gem
     * Move Domain Driven to its own repo
     * Move Repository::Adapters to Repository::Database::Adapters
