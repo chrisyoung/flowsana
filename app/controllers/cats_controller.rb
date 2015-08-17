@@ -28,7 +28,6 @@ class CatsController < ApplicationController
   listen_for(:update_cat_success) { |cat| redirect_to cats_path }
   listen_for(:read_cat_success)   { |cat| @cat = cat }
 
-
   def cat_attributes
     params.require(:cat).permit(:name)
   end

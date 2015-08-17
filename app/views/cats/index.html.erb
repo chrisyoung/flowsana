@@ -1,0 +1,5 @@
+<ul>
+  <% @cats.each do |cat| %>
+    <li><%= link_to(cat.name, edit_cat_path(cat)) %> </li>
+  <% end %>
+</ul>
