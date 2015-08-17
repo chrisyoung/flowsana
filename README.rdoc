@@ -1,10 +1,26 @@
-HOROR - Hexagonal Architecture on Ruby on Rails.
+Domain Driven Rails - Maintainable Domain Architecture in Ruby on Rails.
+
 Don't throw the baby out with the bathwater
+
+Table of Contents
+  .Constraints
+  .Benefits
+  .Overview
+  .Resource
+  .Use Case
+  .Domain Model
+  .Repository
+  .Database Adapter
+  .ActiveRecord Model
+  .Domain Driver
+  .Domain Listeners
+  .Todo
+  .Credits
 
 Constraints
   * No mixins, no inheritance
   * Repositories are always CRUD
-  * One usecase, one repository
+  * One use case, one repository
   * Uses listener pattern
   * Resourceful
   * Hexagonal
@@ -22,27 +38,62 @@ Benefits
   * Generators
   * In-memory database
 
-TODO
-  * Create a video demo
-  * Generate route, controller, and migration
-  * Move Domain Driven to its own repo
-  * Move Repository::Adapters to Repository::Database::Adapters
-  * Don't mix active_model into models
-  * Wrap models in active_model in the rails service
+Domain Driven Overview
+  What it is, what it does
+
+Resource
+  Everything you need to drive by domain in Rails.  Generates a use case, domain_model, database_adapter, and repositories
+  > rails g dd:resource user name:string email:test@domain_driven.com
+
+Use Case
+  Generate a use case
+  > rails g dd:use_case create_user user create
+
+Domain Model
+  Generate domain model, active record model, repository, and adapter
+  > rails g dd:model user name:string email:test@domain_driven.com
+
+Memory repository
+  Generate a memory repository
+  > rails g dd:memory_repository user
+
+Database repository
+  Generate a database repository
+  > rails g dd:database_repository user
+
+Database adapter
+  Generate a database adapter
+  > rails g dd:adapter user
+
+ActiveRecord Model
+  Generate an active record model
+  > rails g dd:memory_repository user name:string email:test@domain_driven.com
+
+Domain Driver
+  before_filter -> { @domain_driver = DomainDriven::Driver.new(self) }
+
+Domain Listeners
+  listen_for(:list_users_success)  { |user| @user = user }
+
+Todo
+  * Documentation
+    * Format this Readme correctly
+  * Sharing:
+    * Create a video demo
+  * Generators:
+    * Generate route, controller
+  * Gem
+    * Move Domain Driven to its own repo
+    * Move Repository::Adapters to Repository::Database::Adapters
+    * domain_dviven
+    * domain_driven::generators
+    * domain_driven::rails
+  * ActiveRecord
+    * Don't mix active_model into models
+    * Wrap models in active_model
   * Generator to build hexagon in lib
-  * Build rails gem for
-      domain_dviven
-      domain_driven::generators
-      domain_driven::rails
 
-Consider:
-
-  class DomainDriven::RailsHelpers::WrapActiveModel
-    # Listener
-
-    def wrap(model)
-      active_model make_active_model(model)
-
-      @listener.active_model_wrap_success(active_model)
-    end
-  end
+Credits
+  * http://victorsavkin.com/post/42542190528/hexagonal-architecture-for-rails-developers
+  * https://www.agileplannerapp.com/blog/building-agile-planner/refactoring-with-hexagonal-rails
+  * http://culttt.com/2014/12/31/hexagonal-architecture/
