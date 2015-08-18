@@ -43,7 +43,7 @@ Domain Driven Overview
 
 Resource
   Everything you need to drive by domain in Rails.  Generates a use case,
-  domain_model, database_adapter, migrationand repositories
+  domain_model, database_adapter, migration and repositories
   > rails g dd:resource user name:string email:test@domain_driven.com
 
 Use Case
