@@ -1,6 +1,6 @@
 class PositionsController < ApplicationController
   before_filter :get_new_position, only: :new
-  before_filter -> { @domain_driver = DomainDriven::Driver.new(self) }
+  before_filter -> { @domain_driver = Hexarails::Driver.new(self) }
 
   def index
     @domain_driver[:get_positions].all
